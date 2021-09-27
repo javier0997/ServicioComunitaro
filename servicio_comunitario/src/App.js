@@ -11,7 +11,6 @@ function App() {
     <div className="App">
           <Router>
              <Navbar/>
-
              <Switch>
                 <Route path='/' exact component={Inicio}/>
                 <Route path='/inicio' component={Inicio}/>
