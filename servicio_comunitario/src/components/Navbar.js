@@ -43,21 +43,21 @@ class Navbar extends Component {
               <ul className="navbar-nav mx-auto">
                 <li className="nav-item mx-2">
                   <Link className="nav-link " to="/inicio">
-                    Home
+                    <h5>Inicio</h5>
                   </Link>
                 </li>
                 <li className="nav-item mx-2">
                   <Link className="nav-link " to="/nosotros">
-                    Nosotros
+                    <h5>Nosotros</h5>
                   </Link>
                 </li>
                 <li className="nav-item mx-2">
                   <Link className="nav-link " to="/contactos">
-                    Contáctanos
+                    <h5>Contáctanos</h5>
                   </Link>
                 </li>
               </ul>
-              <button type="button" className="btn btn-outline-success me-2">
+              <button type="button" className="btn btn-outline-success  ">
                 Iniciar Sesion
               </button>
             </div>
