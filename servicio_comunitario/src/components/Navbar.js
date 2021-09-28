@@ -14,7 +14,7 @@ class Navbar extends Component {
     
     render() {
         return (
-            <div>
+            <div >
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid ">
                     
@@ -28,16 +28,22 @@ class Navbar extends Component {
                     <div className={this.state.show ? 'collapse navbar-collapse ' : 'collapse navbar-collapse active '} >
                         <ul className="navbar-nav mx-auto">
                             <li className="nav-item mx-2">
-                                 <Link className="nav-link " to='/inicio'>Home</Link>
+                                 <Link className="nav-link " to='/inicio'>
+                                     <h5>Inicio</h5> 
+                                 </Link>
                             </li>
                             <li className="nav-item mx-2">
-                                 <Link className="nav-link " to='/nosotros'>Nosotros</Link>
+                                 <Link className="nav-link " to='/nosotros'>
+                                    <h5>Nosotros</h5> 
+                                 </Link>
                             </li>
                             <li className="nav-item mx-2">
-                                 <Link className="nav-link " to='/contactos'>Contáctanos</Link>
+                                 <Link className="nav-link " to='/contactos'>
+                                    <h5>Contáctanos</h5> 
+                                 </Link>
                             </li>
                         </ul>
-                        <button type="button" className="btn btn-outline-success me-2">Iniciar Sesion</button> 
+                        <button type="button" className="btn btn-outline-success  ">Iniciar Sesion</button> 
                     </div>
                     
                 </div>
