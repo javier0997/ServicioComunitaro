@@ -24,3 +24,10 @@ nav .navbar-collapse{
     margin-left: 50rem !important;
   }
 
+@media (min-width: 600px){
+    .alinearNosotros{
+        padding-top: 9rem !important;
+        padding-bottom: 9rem !important;
+    }
+}
+

@@ -11,7 +11,6 @@ class Inicio extends Component {
         <br />
         <h1>U. E. ESCUELA PARROQUIAL SAN JOSÉ</h1>
         <Cards />
-        <Footer />
       </div>
     );
   }
