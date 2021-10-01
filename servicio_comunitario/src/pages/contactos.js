@@ -5,6 +5,7 @@ import mail from "../assets/email.png";
 import Background from "../assets/back.jpg";
 import facebook from "../assets/facebook.png";
 import instagram from "../assets/instagram.png";
+import { Footer } from "../components/Footer";
 
 var sectionStyle = {
   backgroundSize: "cover",
@@ -147,6 +148,9 @@ class Contactos extends Component {
             </Col>
           </Row>
         </Container>
+        <div className="fixed-bottom">
+          <Footer />
+        </div>
       </section>
     );
   }
