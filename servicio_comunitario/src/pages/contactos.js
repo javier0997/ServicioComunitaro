@@ -9,7 +9,7 @@ import { Footer } from "../components/Footer";
 
 var sectionStyle = {
   backgroundSize: "cover",
-  height: "50vh",
+  height: "70vh",
   backgroundImage: `url(${Background})`,
 };
 
