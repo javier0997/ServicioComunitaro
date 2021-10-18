@@ -5,7 +5,7 @@ import Navbar from './components/Navbar';
 import Inicio from './pages/inicio';
 import Nosotros from './pages/nosotros';
 import Contactos from './pages/contactos';
-import { Footer } from './components/Footer';
+import Login from './pages/login';
 
 function App() {
   return (
@@ -17,6 +17,8 @@ function App() {
                 <Route path='/inicio' component={Inicio}/>
                 <Route path='/nosotros' component={Nosotros}/>
                 <Route path='/contactos' component={Contactos}/>
+                <Route path='/login' component={Login}/>
+
              </Switch>
           </Router>
     </div>

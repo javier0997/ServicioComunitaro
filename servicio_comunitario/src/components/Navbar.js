@@ -57,8 +57,13 @@ class Navbar extends Component {
                   </Link>
                 </li>
               </ul>
-              <button type="button" className="btn btn-outline-success  ">
-                Iniciar Sesion
+              <button  className="btn btn-outline-success ">
+                <Link className="nav-link "  to="/login">
+                  <text style={{color:'gray', fontSize:20}}>
+                  Inicio de sesion
+
+                  </text>
+                </Link>
               </button>
             </div>
           </div>
