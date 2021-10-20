@@ -18,7 +18,6 @@ function App() {
                 <Route path='/nosotros' component={Nosotros}/>
                 <Route path='/contactos' component={Contactos}/>
                 <Route path='/login' component={Login}/>
-
              </Switch>
           </Router>
     </div>

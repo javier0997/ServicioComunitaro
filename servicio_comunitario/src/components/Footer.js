@@ -11,33 +11,35 @@ export const Footer = () => {
   };
 
   return (
-    <div class="main-footer bg-dark">
+    <div class="main-footer bg-primary">
       <div class="container">
         <br />
         <div class="row justify-content-md-center">
           {/*Col1*/}
-          <div class="col-md-3 col-sm-6 text-muted">
+          <div class="col-md-3 col-sm-6 text-white">
             <h4>Ubicacion</h4>
             <ul class="list-unstyled">
-              <li><p>aqui va la direccion</p></li>
-              
+              <li>
+                <p>aqui va la direccion</p>
+              </li>
             </ul>
           </div>
           {/*Col2*/}
-          <div class="col-md-3 col-sm-6 text-muted">
+          <div class="col-md-3 col-sm-6 text-white">
             <h4>Nosotros</h4>
             <ul class="list-unstyled">
               <li>
                 <p className="fst-italic">
                   {" "}
-                  "El temor del Señor es la instrucción de la sabiduría, y antes del honor viene la humildad"
+                  "El temor del Señor es la instrucción de la sabiduría, y antes
+                  del honor viene la humildad"
                 </p>
               </li>
             </ul>
           </div>
 
           {/*Col3*/}
-          <div class="col-md-3 col-sm-6 text-muted">
+          <div class="col-md-3 col-sm-6 text-white">
             <h4>Contacto</h4>
             <ul class="list-unstyled">
               <div class="row justify-content-md-center">
@@ -50,7 +52,7 @@ export const Footer = () => {
                     <button
                       type="button"
                       onClick={redirect}
-                      class="btn btn-outline-secondary"
+                      class="btn btn-outline-light"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +77,7 @@ export const Footer = () => {
                     <button
                       type="button"
                       onClick={redirect}
-                      class="btn btn-outline-secondary"
+                      class="btn btn-outline-light"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +106,7 @@ export const Footer = () => {
                     <button
                       type="button"
                       onClick={redirect}
-                      class="btn btn-outline-secondary"
+                      class="btn btn-outline-light"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +131,7 @@ export const Footer = () => {
                     <button
                       type="button"
                       onClick={redirect}
-                      class="btn btn-outline-secondary"
+                      class="btn btn-outline-light"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -149,9 +151,11 @@ export const Footer = () => {
           </div>
         </div>
         {/*footer bottom */}
-        <div className="footer-copyright text-center py-3 text-muted">
+        <div className="footer-copyright text-center py-3 text-white">
           © 2020 Copyright:
-          <a href="https://mdbootstrap.com/">
+          <a  
+          className="text-white"
+          href="https://mdbootstrap.com/">
             {" "}
             U.E. Escuela Parroquial San José
           </a>

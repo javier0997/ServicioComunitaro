@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../css/Header.css";
+import {Button } from "react-bootstrap";
 import logo from "../assets/sj.png";
 
 class Navbar extends Component {
@@ -14,7 +15,7 @@ class Navbar extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-light bg-primary">
           <div className="container-fluid ">
             <Link className="nav-link active" to="/inicio">
               <img src={logo} alt="Logo" width="50" />
@@ -43,28 +44,28 @@ class Navbar extends Component {
               <ul className="navbar-nav mx-auto">
                 <li className="nav-item mx-2">
                   <Link className="nav-link " to="/inicio">
-                    <h5>Inicio</h5>
+                    <h5 className="text-white">Inicio</h5>
                   </Link>
                 </li>
                 <li className="nav-item mx-2">
                   <Link className="nav-link " to="/nosotros">
-                    <h5>Nosotros</h5>
+                    <h5 className="text-white">Nosotros</h5>
                   </Link>
                 </li>
-                <li className="nav-item mx-2">
+                <li className="nav-item mx-2 ">
                   <Link className="nav-link " to="/contactos">
-                    <h5>Contáctanos</h5>
+                    <h5 className="text-white">Contáctanos</h5>
                   </Link>
                 </li>
               </ul>
-              <button  className="btn btn-outline-success ">
-                <Link className="nav-link "  to="/login">
-                  <text style={{color:'gray', fontSize:20}}>
+              <Button  variant="light">
+                <Link className="nav-link text-secondary "  to="/login">
+                  <text>
                   Inicio de sesion
 
                   </text>
                 </Link>
-              </button>
+              </Button>
             </div>
           </div>
         </nav>

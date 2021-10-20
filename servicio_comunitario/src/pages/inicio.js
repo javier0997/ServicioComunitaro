@@ -5,7 +5,7 @@ import { Footer } from "../components/Footer";
 class Inicio extends Component {
   render() {
     return (
-      <div style={{background:'#B2B5C1'}}>
+      <div>
         <br />
         <Carousel />
         <br />

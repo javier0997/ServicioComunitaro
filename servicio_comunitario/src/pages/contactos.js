@@ -16,12 +16,12 @@ var sectionStyle = {
 class Contactos extends Component {
   render() {
     return (
-      <section style={sectionStyle}>
+      <section>
+        <br />
+
         <div
           style={{
             fontSize: 40,
-            color: "#ffffff",
-            fontWeight: "bold",
             paddingTop: 50,
           }}
         >
@@ -34,120 +34,92 @@ class Contactos extends Component {
           </lable>
         </div>
 
-        <Container style={{ paddingTop: 220 }}>
+        <br />
+
+        <Container>
           <Row>
-            <Col style={styles.card}>
-              <Card style={styles.c}>
-                <Card.Body>
-                  <Card.Title>Telefonos</Card.Title>
-                  <Col>
-                    <Card.Text style={{ textAlign: "center", marginTop: 20 }}>
-                      yjmendez10@gmail.com
-                    </Card.Text>
-                  </Col>
-                  <Row>
-                    <Col style={{ marginTop: 20 }}>
-                      <Card.Link
-                        target="_blank"
-                        href="https://www.facebook.com"
-                      >
-                        Facebook
-                      </Card.Link>
-                    </Col>
-                    <Col style={{ paddingTop: 10 }}>
-                      <img src={telephone} alt="tlf" width="40" />
-                    </Col>
-                  </Row>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col></Col>
-
-            <Col style={styles.card}>
-              <Card style={styles.c}>
+            <Col>
+              <Card style={{ width: "18rem" }}>
                 <Card.Body>
                   <Card.Title>Facebook</Card.Title>
-                  <Col>
-                    <Card.Text style={{ textAlign: "center", marginTop: 20 }}>
-                      yjmendez10@gmail.com
-                    </Card.Text>
-                  </Col>
-                  <Row>
-                    <Col style={{ marginTop: 20 }}>
-                      <Card.Link
-                        target="_blank"
-                        href="https://www.facebook.com"
-                      >
-                        Facebook
-                      </Card.Link>
-                    </Col>
-                    <Col style={{ paddingTop: 10 }}>
-                      <img src={facebook} alt="tlf" width="40" />
-                    </Col>
-                  </Row>
+
+                  <Card.Text>
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </Card.Text>
+                  <Card.Link target="_blank" href="https://www.facebook.com">
+                    Facebook
+                  </Card.Link>
                 </Card.Body>
               </Card>
             </Col>
 
-            <Col></Col>
-
-            <Col style={styles.card}>
-              <Card style={styles.c}>
-                <Card.Body>
-                  <Card.Title>Correros</Card.Title>
-                  <Col>
-                    <Card.Text style={{ textAlign: "center", marginTop: 20 }}>
-                      yjmendez10@gmail.com
-                    </Card.Text>
-                  </Col>
-                  <Row>
-                    <Col style={{ marginTop: 20 }}>
-                      <Card.Link
-                        target="_blank"
-                        href="https://www.google.com/intl/es-419/gmail/about/"
-                      >
-                        Gmail
-                      </Card.Link>
-                    </Col>
-
-                    <Col style={{ paddingTop: 10 }}>
-                      <img src={mail} alt="tlf" width="40" />
-                    </Col>
-                  </Row>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col></Col>
-
-            <Col style={styles.card}>
-              <Card style={styles.c}>
+            <Col>
+              <Card style={{ width: "18rem" }}>
                 <Card.Body>
                   <Card.Title>Instagram</Card.Title>
-                  <Col>
-                    <Card.Text style={{ textAlign: "center", marginTop: 20 }}>
-                      yjmendez10@gmail.com
-                    </Card.Text>
-                  </Col>
-                  <Row>
-                    <Col style={{ marginTop: 20 }}>
-                      <Card.Link
-                        target="_blank"
-                        href="https://www.instagram.com/?hl=es"
-                      >
-                        Instagram
-                      </Card.Link>
-                    </Col>
-                    <Col style={{ paddingTop: 10 }}>
-                      <img src={instagram} alt="tlf" width="40" />
-                    </Col>
-                  </Row>
+
+                  <Card.Text>
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </Card.Text>
+                  <Card.Link
+                    target="_blank"
+                    href="https://www.instagram.com/?hl=es"
+                  >
+                    Instagram
+                  </Card.Link>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col>
+              <Card style={{ width: "18rem" }}>
+                <Card.Body>
+                  <Card.Title>Email</Card.Title>
+
+                  <Card.Text>
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </Card.Text>
+                  <Card.Link
+                    target="_blank"
+                    href="https://www.google.com/intl/es-419/gmail/about/"
+                  >
+                    Gmail
+                  </Card.Link>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col>
+              <Card style={{ width: "18rem" }}>
+                <Card.Body>
+                  <Card.Title>Telefono</Card.Title>
+                  <Card.Text>
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </Card.Text>
+                  <Card.Link href="#">Another Link</Card.Link>
                 </Card.Body>
               </Card>
             </Col>
           </Row>
+          <br />
+          <Row>
+            <Col>
+              <img src={facebook} alt="tlf" width="40" />
+            </Col>
+            <Col>
+              <img src={instagram} alt="tlf" width="40" />
+            </Col>
+            <Col>
+              <img src={mail} alt="tlf" width="40" />
+            </Col>
+            <Col>
+              <img src={telephone} alt="tlf" width="40" />
+            </Col>
+          </Row>
         </Container>
+
         <div className="fixed-bottom">
           <Footer />
         </div>

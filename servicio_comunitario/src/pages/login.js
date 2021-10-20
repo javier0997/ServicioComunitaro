@@ -6,7 +6,6 @@ class Login extends Component {
     return (
       <section
         style={{
-          backgroundColor: "#B2B5C1",
           backgroundSize: "cover",
           height: "89.3vh",
         }}
@@ -45,8 +44,8 @@ class Login extends Component {
                         />
                       </Form.Group>
 
-                      <div style={{ paddingRight: 522 }}>
-                        <Button variant="secondary" type="submit">
+                      <div style={{ paddingRight: 510 }}>
+                        <Button variant="primary" type="submit" className="text-white">
                           Iniciar sesion
                         </Button>
                       </div>

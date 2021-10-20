@@ -21,7 +21,7 @@ class Nosotros extends Component {
   render() {
     return (
       <div>
-        <div className={"alinearNosotros"} style={sectionStyle}>
+        <div className={"alinearNosotros"}>
           <Container
             style={{
               maxWidth: 800,
@@ -33,16 +33,16 @@ class Nosotros extends Component {
               <Row>
                 <Col style={ListStyle}>
                   <ListGroup>
-                    <ListGroup.Item variant="secondary" action href="#link1">
+                    <ListGroup.Item variant="primary" action href="#link1">
                       Quienes Somos?
                     </ListGroup.Item>
-                    <ListGroup.Item variant="secondary" action href="#link2">
+                    <ListGroup.Item variant="primary" action href="#link2">
                       Misión
                     </ListGroup.Item>
-                    <ListGroup.Item variant="secondary" action href="#link3">
+                    <ListGroup.Item variant="primary" action href="#link3">
                       Visión
                     </ListGroup.Item>
-                    <ListGroup.Item variant="secondary" action href="#link4">
+                    <ListGroup.Item variant="primary" action href="#link4">
                       Perfil Docente
                     </ListGroup.Item>
                   </ListGroup>
@@ -50,7 +50,7 @@ class Nosotros extends Component {
 
                 <Col
                   style={{
-                    backgroundColor: "rgba(52, 52, 52, 0.8)",
+                    backgroundColor: "rgba(1, 138, 255, 0.8)",
                     borderRadius: 10,
                     paddingInline: 10,
                     paddingBlock: 50,
