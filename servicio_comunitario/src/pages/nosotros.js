@@ -27,6 +27,7 @@ class Nosotros extends Component {
               maxWidth: 800,
               alignItems: "center",
               justifyContent: "center",
+      
             }}
           >
             <Tab.Container defaultActiveKey="#link1">
@@ -112,9 +113,9 @@ class Nosotros extends Component {
           </Container>
         </div>
 
-        <div className="fixed-bottom">
+      
           <Footer />
-        </div>
+      
       </div>
     );
   }

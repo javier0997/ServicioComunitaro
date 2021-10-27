@@ -6,6 +6,8 @@ import Background from "../assets/back.jpg";
 import facebook from "../assets/facebook.png";
 import instagram from "../assets/instagram.png";
 import { Footer } from "../components/Footer";
+import "../css/Header.css";
+
 
 var sectionStyle = {
   backgroundSize: "cover",
@@ -23,22 +25,24 @@ class Contactos extends Component {
           style={{
             fontSize: 40,
             paddingTop: 50,
+            marginInline:30
           }}
         >
-          <lable>
-            Pagina de Contacto
-            <p>
+             <h2>
+               Pagina de Contacto
+            </h2>
+          
+            <h3>
               Esta es la pagina por la cual usted se podra contactar con el
               Colegio
-            </p>
-          </lable>
+            </h3>
         </div>
 
         <br />
 
-        <Container>
+        <Container style={{ marginBottom: "5rem" }}>
           <Row>
-            <Col>
+            <Col className={"alinearCardContactos"}>
               <Card style={{ width: "18rem" }}>
                 <Card.Body>
                   <Card.Title>Facebook</Card.Title>
@@ -50,11 +54,15 @@ class Contactos extends Component {
                   <Card.Link target="_blank" href="https://www.facebook.com">
                     Facebook
                   </Card.Link>
+                  <Card.Text style={{ marginTop: "1rem" }}>
+                     <img src={facebook} alt="tlf" width="40" />
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
+           
 
-            <Col>
+            <Col  className={"alinearCardContactos"}>
               <Card style={{ width: "18rem" }}>
                 <Card.Body>
                   <Card.Title>Instagram</Card.Title>
@@ -69,10 +77,14 @@ class Contactos extends Component {
                   >
                     Instagram
                   </Card.Link>
+                  <Card.Text style={{ marginTop: "1rem" }}>
+                    <img src={instagram} alt="tlf" width="40" />
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
-            <Col>
+
+            <Col  className={"alinearCardContactos"}>
               <Card style={{ width: "18rem" }}>
                 <Card.Body>
                   <Card.Title>Email</Card.Title>
@@ -87,10 +99,14 @@ class Contactos extends Component {
                   >
                     Gmail
                   </Card.Link>
+                  <Card.Text style={{ marginTop: "1rem" }}>
+                     <img src={mail} alt="tlf" width="40" />
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
-            <Col>
+
+            <Col  className={"alinearCardContactos"}>
               <Card style={{ width: "18rem" }}>
                 <Card.Body>
                   <Card.Title>Telefono</Card.Title>
@@ -99,30 +115,21 @@ class Contactos extends Component {
                     up the bulk of the card's content.
                   </Card.Text>
                   <Card.Link href="#">Another Link</Card.Link>
+                  <Card.Text style={{ marginTop: "1rem" }}>
+                     <img src={telephone} alt="tlf" width="40" />
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
           </Row>
           <br />
-          <Row>
-            <Col>
-              <img src={facebook} alt="tlf" width="40" />
-            </Col>
-            <Col>
-              <img src={instagram} alt="tlf" width="40" />
-            </Col>
-            <Col>
-              <img src={mail} alt="tlf" width="40" />
-            </Col>
-            <Col>
-              <img src={telephone} alt="tlf" width="40" />
-            </Col>
-          </Row>
+
+          
         </Container>
 
-        <div className="fixed-bottom">
+       
           <Footer />
-        </div>
+      
       </section>
     );
   }
