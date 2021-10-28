@@ -3,6 +3,8 @@ import { ListGroup, Col, Tab, Row, Container } from "react-bootstrap";
 import "../css/Header.css";
 import Background from "../assets/back.jpg";
 import { Footer } from "../components/Footer";
+import Navbar from "../components/Navbar";
+
 
 var ListStyle = {
   maxWidth: 370,
@@ -21,6 +23,7 @@ class Nosotros extends Component {
   render() {
     return (
       <div>
+           <Navbar/>   
         <div className={"alinearNosotros"}>
           <Container
             style={{

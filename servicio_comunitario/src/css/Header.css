@@ -40,3 +40,8 @@ nav .navbar-collapse{
     }
 }
 
+.Sidebar {
+    height: 100%;
+    max-width: 300px;
+    background-color: aqua;
+   }

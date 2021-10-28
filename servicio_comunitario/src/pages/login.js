@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button, Card, Container, Row, Col } from "react-bootstrap";
+import Navbar from "../components/Navbar";
+
 
 class Login extends Component {
   render() {
@@ -10,11 +12,13 @@ class Login extends Component {
           height: "89.3vh",
         }}
       >
+        <Navbar/>    
         <Container style={{width:700}}>
+        
           <Col>
 
             <Row>
-              <div style={{paddingTop:200}}>
+              <div style={{paddingTop:100}}>
               <Card className="bg-white">
                 <Card.Body>
                   <Card.Title className="text-muted " style={{ fontSize: 40 }}>
@@ -45,7 +49,7 @@ class Login extends Component {
                       </Form.Group>
 
                       <div style={{ paddingRight: 510 }}>
-                        <Button variant="primary" type="submit" className="text-white">
+                        <Button variant="primary" type="submit" className="text-white" onClick={()=>{window.location.pathname = '/profesores'}}>
                           Iniciar sesion
                         </Button>
                       </div>

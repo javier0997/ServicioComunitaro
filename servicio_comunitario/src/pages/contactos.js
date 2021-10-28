@@ -7,6 +7,7 @@ import facebook from "../assets/facebook.png";
 import instagram from "../assets/instagram.png";
 import { Footer } from "../components/Footer";
 import "../css/Header.css";
+import Navbar from "../components/Navbar";
 
 
 var sectionStyle = {
@@ -19,6 +20,7 @@ class Contactos extends Component {
   render() {
     return (
       <section>
+        <Navbar/>    
         <br />
 
         <div
