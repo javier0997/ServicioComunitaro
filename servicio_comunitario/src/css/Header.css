@@ -45,3 +45,12 @@ nav .navbar-collapse {
   max-width: 300px;
   background-color: aqua;
 }
+
+.espacio-iconos-tabla {
+  margin-right: 15px;
+}
+
+.btn-cargar{
+  display: flex;
+  align-items: center;
+}
