@@ -116,9 +116,11 @@ class Nosotros extends Component {
           </Container>
         </div>
 
+        <div style={{paddingTop:90}}>
       
           <Footer />
       
+      </div>
       </div>
     );
   }
