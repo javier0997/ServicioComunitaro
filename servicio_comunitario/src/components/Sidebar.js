@@ -28,7 +28,7 @@ function Sidebar() {
               <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
             </svg>
           </div>
-          <h5 className="text-white">Nosotros</h5>
+          <h5 style={{ paddingTop: 15 }} className="text-white">Asignaciones</h5>
         </Link>
       </div>
 
@@ -47,7 +47,7 @@ function Sidebar() {
               <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
             </svg>
           </div>
-          <h5 className="text-white">Seccion de Boleta</h5>
+          <h5 style={{ paddingTop: 15 }} className="text-white">Boletines</h5>
         </Link>
       </div>
 
@@ -66,7 +66,7 @@ function Sidebar() {
               <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z" />
             </svg>
           </div>
-          <h5 className="text-white">Cerrar Sesion</h5>
+          <h5 style={{ paddingTop: 15 }} className="text-white">Cerrar Sesion</h5>
         </Link>
       </div>
     </div>
