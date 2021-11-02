@@ -12,7 +12,10 @@ class Inicio extends Component {
         <br />
         <Carousel />
         <br />
+        <div style={{ display: 'flex',  justifyContent:'center', alignItems:'center' }}>
+
         <h1>U. E. ESCUELA PARROQUIAL SAN JOSÉ</h1>
+        </div>
         <Cards />
         <Footer />
       </div>

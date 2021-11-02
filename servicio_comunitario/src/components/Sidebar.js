@@ -23,13 +23,13 @@ function Sidebar() {
   };
   return (
     <div className="Sidebar bg-primary" style={{ height: "100vh", width: 240 }}>
-      <div style={{ paddingTop: 20 }}>
+      <div style={{ paddingTop: 20, display: 'flex',  justifyContent:'center', alignItems:'center'  }}>
         <img src={logo} alt="Logo" width="50" />
       </div>
 
-      <div style={{ paddingTop: 30, hover: "red" }}>
+      <div style={{ paddingTop: 30, display: 'flex',  justifyContent:'center', alignItems:'center' }}>
         <Link className="nav-link " to="/inicio">
-          <div>
+          <div style={{ display: 'flex',  justifyContent:'center', alignItems:'center' }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
@@ -42,15 +42,15 @@ function Sidebar() {
               <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
             </svg>
           </div>
-          <h5 style={{ paddingTop: 15 }} className="text-white">
+          <h5 style={{ paddingTop: 15  }} className="text-white">
             Asignaciones
           </h5>
         </Link>
       </div>
 
-      <div style={{ paddingTop: 10 }}>
+      <div style={{ paddingTop: 10, display: 'flex',  justifyContent:'center', alignItems:'center'  }}>
         <Link className="nav-link " to="/inicio">
-          <div>
+          <div style={{display: 'flex',  justifyContent:'center', alignItems:'center' }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
@@ -69,7 +69,7 @@ function Sidebar() {
         </Link>
       </div>
 
-      <div style={{ paddingTop: 10 }}>
+      <div style={{ paddingTop: 10, display: 'flex',  justifyContent:'center', alignItems:'center'  }}>
         <button type="button" class="btn btn-danger" onClick={handleLogout}>
           <div>
             <svg

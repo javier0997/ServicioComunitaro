@@ -17,16 +17,32 @@ export const Footer = () => {
         <div class="row justify-content-md-center">
           {/*Col1*/}
           <div class="col-md-3 col-sm-6 text-white">
-            <h4>Ubicacion</h4>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <h4>Ubicacion</h4>
+            </div>
             <ul class="list-unstyled">
               <li>
-                <p>aqui va la direccion</p>
+                <p>aqui va la direccion bla bla bla bla bla bla bla</p>
               </li>
             </ul>
           </div>
           {/*Col2*/}
           <div class="col-md-3 col-sm-6 text-white">
-            <h4>Nosotros</h4>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <h4>Nosotros</h4>
+            </div>
             <ul class="list-unstyled">
               <li>
                 <p className="fst-italic">
@@ -40,7 +56,15 @@ export const Footer = () => {
 
           {/*Col3*/}
           <div class="col-md-3 col-sm-6 text-white">
-            <h4>Contacto</h4>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <h4>Contacto</h4>
+            </div>
             <ul class="list-unstyled">
               <div class="row justify-content-md-center">
                 <li class="col-md-3 col-sm-6">
@@ -153,9 +177,7 @@ export const Footer = () => {
         {/*footer bottom */}
         <div className="footer-copyright text-center py-3 text-white">
           © 2020 Copyright:
-          <a  
-          className="text-white"
-          href="https://mdbootstrap.com/">
+          <a className="text-white" href="https://mdbootstrap.com/">
             {" "}
             U.E. Escuela Parroquial San José
           </a>

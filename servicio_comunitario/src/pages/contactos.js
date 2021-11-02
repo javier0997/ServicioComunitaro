@@ -9,7 +9,6 @@ import { Footer } from "../components/Footer";
 import "../css/Header.css";
 import Navbar from "../components/Navbar";
 
-
 var sectionStyle = {
   backgroundSize: "cover",
   height: "70vh",
@@ -20,24 +19,37 @@ class Contactos extends Component {
   render() {
     return (
       <section>
-        <Navbar/>    
+        <Navbar />
         <br />
 
         <div
           style={{
             fontSize: 40,
             paddingTop: 50,
-            marginInline:30
+            marginInline: 30,
           }}
         >
-             <h2>
-               Pagina de Contacto
-            </h2>
-          
-            <h3>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <h2>Pagina de Contacto</h2>
+          </div>
+          <div>
+            <h3
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               Esta es la pagina por la cual usted se podra contactar con el
               Colegio
             </h3>
+          </div>
         </div>
 
         <br />
@@ -47,27 +59,63 @@ class Contactos extends Component {
             <Col className={"alinearCardContactos"}>
               <Card style={{ width: "18rem" }}>
                 <Card.Body>
-                  <Card.Title>Facebook</Card.Title>
+                  <Card.Title>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      Facebook
+                    </div>
+                  </Card.Title>
 
                   <Card.Text>
                     Some quick example text to build on the card title and make
                     up the bulk of the card's content.
                   </Card.Text>
                   <Card.Link target="_blank" href="https://www.facebook.com">
-                    Facebook
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      Facebook
+                    </div>
                   </Card.Link>
                   <Card.Text style={{ marginTop: "1rem" }}>
-                     <img src={facebook} alt="tlf" width="40" />
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <img src={facebook} alt="tlf" width="40" />
+                    </div>
                   </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
-           
 
-            <Col  className={"alinearCardContactos"}>
+            <Col className={"alinearCardContactos"}>
               <Card style={{ width: "18rem" }}>
                 <Card.Body>
-                  <Card.Title>Instagram</Card.Title>
+                  <Card.Title>
+                    {" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      Instagram
+                    </div>
+                  </Card.Title>
 
                   <Card.Text>
                     Some quick example text to build on the card title and make
@@ -77,19 +125,48 @@ class Contactos extends Component {
                     target="_blank"
                     href="https://www.instagram.com/?hl=es"
                   >
-                    Instagram
+                    {" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      Instagram
+                    </div>
                   </Card.Link>
                   <Card.Text style={{ marginTop: "1rem" }}>
-                    <img src={instagram} alt="tlf" width="40" />
+                    {" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <img src={instagram} alt="tlf" width="40" />
+                    </div>
                   </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
 
-            <Col  className={"alinearCardContactos"}>
+            <Col className={"alinearCardContactos"}>
               <Card style={{ width: "18rem" }}>
                 <Card.Body>
-                  <Card.Title>Email</Card.Title>
+                  <Card.Title>
+                    {" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      Email
+                    </div>
+                  </Card.Title>
 
                   <Card.Text>
                     Some quick example text to build on the card title and make
@@ -99,41 +176,86 @@ class Contactos extends Component {
                     target="_blank"
                     href="https://www.google.com/intl/es-419/gmail/about/"
                   >
-                    Gmail
+                    {" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      Gmail
+                    </div>
                   </Card.Link>
                   <Card.Text style={{ marginTop: "1rem" }}>
-                     <img src={mail} alt="tlf" width="40" />
+                    {" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <img src={mail} alt="tlf" width="40" />
+                    </div>
                   </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
 
-            <Col  className={"alinearCardContactos"}>
+            <Col className={"alinearCardContactos"}>
               <Card style={{ width: "18rem" }}>
                 <Card.Body>
-                  <Card.Title>Telefono</Card.Title>
+                  <Card.Title>
+                    {" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      Telefono
+                    </div>
+                  </Card.Title>
                   <Card.Text>
                     Some quick example text to build on the card title and make
                     up the bulk of the card's content.
                   </Card.Text>
-                  <Card.Link href="#">Another Link</Card.Link>
+                  <Card.Link href="#">
+                    {" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      Another Link
+                    </div>
+                  </Card.Link>
                   <Card.Text style={{ marginTop: "1rem" }}>
-                     <img src={telephone} alt="tlf" width="40" />
+                    {" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <img src={telephone} alt="tlf" width="40" />
+                    </div>
                   </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
           </Row>
           <br />
-
-          
         </Container>
 
-       <div style={{paddingTop:91}}>
-
+        <div style={{ paddingTop: 91 }}>
           <Footer />
-       </div>
-      
+        </div>
       </section>
     );
   }
