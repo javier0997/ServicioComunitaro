@@ -3,7 +3,9 @@ import Inicio from "../pages/inicio";
 import Nosotros from "../pages/nosotros";
 import Contactos from "../pages/contactos";
 import asignacionHome from "../pages/profesores/asignacionHome";
+import EstudiantesHome from "../pages/estudiantes/asignacionesHome";
 import LoginScreen from "../pages/login";
+import administradorhome from "../pages/administrador/administradorhome";
 
 const Navigation = () => {
   return (
@@ -12,16 +14,28 @@ const Navigation = () => {
         {/* ------ Colegio Page Paths ----- */}
         <Route exact path="/" component={Inicio} />
         <Route path="/inicio" component={Inicio} />
-        <Route path="/nosotros" component={Nosotros} />
+        <Route path="/nosotros">
+          <Nosotros />
+        </Route>
         <Route path="/contactos" component={Contactos} />
-
         <Route path="/login">
           <LoginScreen />
         </Route>
 
         {/* ------ Profesores Paths ----- */}
         <Switch>
-          <Route path="/profesores" component={asignacionHome} />
+          {/* <Route exact path="/profesores">
+              <asignacionHome />
+            </Route> */}
+          <Route exact path="/profesores" component={asignacionHome} />
+
+          <Route path="/profesores/estudientas" component={EstudiantesHome} />
+        </Switch>
+
+        {/* ------ Administrador Paths ----- */}
+
+        <Switch>
+          <Route path="/administradorhome" component={administradorhome} />
         </Switch>
 
         {/* ------ Estudiantes Paths ----- */}
