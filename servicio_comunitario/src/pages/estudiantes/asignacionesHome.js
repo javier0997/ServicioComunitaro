@@ -67,7 +67,7 @@ const EstudiantesHome = () => {
     },
     {
       title: "Fecha de Nacimiento",
-      field: "Feca_de_Nacimiento",
+      field: "Fecha_de_Nacimiento",
     },
   ];
 
