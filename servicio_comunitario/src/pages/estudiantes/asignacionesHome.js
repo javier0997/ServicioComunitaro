@@ -7,6 +7,8 @@ import { Auth } from "../../context/auth";
 import Sidebar from "../../components/Sidebar";
 import { Col, Row } from "react-bootstrap";
 import { EstudianteCreacion } from "../../components/EstudianteCreacion";
+import { EliminarEstudiante } from "../../components/eliminarEstudiante";
+import { ModificarEstudiante } from "../../components/modificarEstudiante";
 
 const EstudiantesHome = () => {
   const db = firebase.firestore();
@@ -20,10 +22,6 @@ const EstudiantesHome = () => {
       history.replace("/login");
     }
   }, [user, history]);
-
-  const handleLogout = () => {
-    firebase.auth().signOut();
-  };
 
   useEffect(() => {
     (async () => {
@@ -68,6 +66,14 @@ const EstudiantesHome = () => {
     {
       title: "Fecha de Nacimiento",
       field: "Fecha_de_Nacimiento",
+    },
+    {
+      title: "Eliminar",
+      render: (rowData) => <EliminarEstudiante data={rowData} />,
+    },
+    {
+      title: "Modificar",
+      render: (rowData) => <ModificarEstudiante data={rowData} />,
     },
   ];
 

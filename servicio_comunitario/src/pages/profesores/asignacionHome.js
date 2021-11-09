@@ -6,9 +6,9 @@ import { Auth } from "../../context/auth";
 
 import Sidebar from "../../components/Sidebar";
 import { Col, Row } from "react-bootstrap";
+import { EliminarProfesor } from "../../components/eliminarProfesor";
 import { ProfesorCreacion } from "../../components/ProfesorCreacion";
-
-
+import { ModificarProfesor } from "../../components/modificarProfesor";
 
 const AsignacionHome = () => {
   const db = firebase.firestore();
@@ -71,36 +71,14 @@ const AsignacionHome = () => {
       title: "Cedula",
       field: "Cedula",
     },
-    // {
-    //   title: "Pièce jointe",
-    //   field: "files",
-    //   render: (rowData) => <FilesDialog data={rowData.files} />,
-    // },
-    // {
-    //   title: "Cooptant",
-    //   render: (rowData) => <CandidatesDetailDialog data={rowData} />,
-    // },
-    // {
-    //   title: "Offre d'emploi",
-    //   field: "ref.title",
-    // },
-    // {
-    //   title: "Entretien en cours",
-    //   render: (rowData) => <EmailCandidatesCourse data={rowData} />,
-    // },
-    // {
-    //   title: "statuts",
-    //   field: "status",
-    // },
-    // {
-    //   title: "Action",
-    //   render: (rowData) => <EmailCandidateStatus data={rowData} />,
-    // },
-    // {
-    //   title: "supprimer le candidat",
-    //   render: (rowData) => <DeleteCandidate data={rowData} />,
-
-    // },
+    {
+      title: "Eliminar",
+      render: (rowData) => <EliminarProfesor data={rowData} />,
+    },
+    {
+      title: "Modificar",
+      render: (rowData) => <ModificarProfesor data={rowData} />,
+    },
   ];
 
   return (
