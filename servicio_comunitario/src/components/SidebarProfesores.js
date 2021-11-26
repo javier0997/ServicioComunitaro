@@ -11,7 +11,7 @@ function SidebarProfesores() {
 
 
   const handleLogout = () => {
-   
+    window.location.href = "/inicio";
   };
 
   return (
