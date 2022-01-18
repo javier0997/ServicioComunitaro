@@ -27,7 +27,7 @@ const Navigation = () => {
           {/* <Route exact path="/profesores">
               <asignacionHome />
             </Route> */}
-          <Route  path="/profesores" component={asignacionHome} />
+          <Route exact path="/profesores" component={asignacionHome} />
 
           <Route path="/profesores/estudientas" component={EstudiantesHome} />
         </Switch>
