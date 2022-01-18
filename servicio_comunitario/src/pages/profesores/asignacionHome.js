@@ -9,33 +9,39 @@ import SidebarProfesores from "../../components/SidebarProfesores";
 
 const AsignacionHome = () => {
   const db = firebase.firestore();
-  const [asignaciones, setAsig] = useState(null);
+  const [profesores, setProfeores] = useState(null);
 
+  const [loginTrue, setLogin] = useState(() => {
+    // getting stored value
+    const saved = localStorage.getItem("loginSC");
+    const initialValue = JSON.parse(saved);
+    return initialValue || "";
+  });
 
-  const datosUser = JSON.parse(localStorage.getItem('datosUser'));
-  const [user, setUser] = useState(datosUser);
+  // useEffect(() => {
+  //   if (!user) {
+  //     history.replace("/login");
+  //   }
+  // }, [user, history]);
 
-
- 
   // const handleLogout = () => {
   //   firebase.auth().signOut();
   // };
 
   useEffect(() => {
     (async () => {
-      db.collection("asignaciones").where('profesor_user', '==', `${user.userSC}`).where('curso', '==', `${user.cursoSC}`)
+      db.collection("profesores")
         .get()
         .then((snapshot) => {
-          const asignaciones = [];
+          const profesores = [];
           snapshot.forEach((doc) => {
             const data = doc.data();
-            asignaciones.push({
+            profesores.push({
               id: doc.id,
               ...data,
             });
           });
-          setAsig(asignaciones);
-          console.log(user.cursoSC);
+          setProfeores(profesores);
         })
         .catch((error) => console.log(error));
     })();
@@ -43,28 +49,28 @@ const AsignacionHome = () => {
 
   const columns = [
     {
-      title: "Asignacion",
-      field: "nombre_asignacion",
+      title: "Nombre",
+      field: "Nombre",
     },
     {
-      title: "Curso",
-      field: "curso",
+      title: "Apellido",
+      field: "Apellido",
     },
     {
-      title: "Descripcion",
-      field: "descripcion",
+      title: "Telefono",
+      field: "Telefono",
     },
     {
-      title: "Fecha Inicio",
-      field: "fecha_inicio",
+      title: "Email",
+      field: "email",
     },
     {
-      title: "Fecha Fin",
-      field: "fecha_fin",
+      title: "Seccion",
+      field: "Seccion",
     },
     {
-      title: "Descargar",
-      field: "archivo",
+      title: "Cedula",
+      field: "Cedula",
     },
     {
       title: "Eliminar",
@@ -76,7 +82,7 @@ const AsignacionHome = () => {
     },
   ];
 
-  if(user.loginSC=="1"){
+  if(loginTrue=="1"){
   return (
     
     <div>
@@ -94,7 +100,7 @@ const AsignacionHome = () => {
                 justifyContent: "center",
               }}
             >
-              <h1>Tabla de Asignaciones</h1>
+              <h1> Tabla de Profesores</h1>
             </div>
             <br />
             <section
@@ -103,17 +109,20 @@ const AsignacionHome = () => {
             >
               <TableComponent
                 columns={columns}
-                data={asignaciones ? asignaciones : []}
+                data={profesores ? profesores : []}
               />
             </section>
           </div>
           <br />
+          <div>
+            <ProfesorCreacion />
+          </div>
         </Col>
       </Row>
     </div>
         
   );
-  }else if(user.loginSC=="0"){
+  }else if(loginTrue=="0"){
     <h1>Error: Vuelva a iniciar sesion.</h1>
   }
 

@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 
 
 export const Login = () => {
-  localStorage.clear();
+  localStorage.setItem("loginSC", "0");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -16,7 +16,6 @@ export const Login = () => {
   const [passwordAux, setPasswordAux] = useState("");
   const [emailAux, setEmailAux] = useState("");
   const [rol, setRol] = useState("");
-  const [curso, setCurso] = useState("");
 
 
   const history = useHistory();
@@ -41,19 +40,12 @@ export const Login = () => {
           setRol(doc.data().rol);
           setEmailAux(doc.data().user);
           setPasswordAux(doc.data().contraseña);
-          setCurso(doc.data().curso);
-          
-          console.log(rol+" "+emailAux+" "+passwordAux+" "+curso);
+          console.log(rol+" "+emailAux+" "+passwordAux);
 
           if (email==emailAux && password==passwordAux ){
             switch (rol) {
               case 'profesor':
-                const profesorCaracteristicas = {
-                                                'userSC': `${email}`,
-                                                'cursoSC': `${curso}`,
-                                                'loginSC': "1"
-                                              };
-                localStorage.setItem('datosUser', JSON.stringify(profesorCaracteristicas));
+                localStorage.setItem("loginSC", "1");
                 history.push("/profesores");
                 break;
               case 'estudiante':
