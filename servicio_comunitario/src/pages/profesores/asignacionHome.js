@@ -1,31 +1,32 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
 import firebase from "firebase/app";
 import TableComponent from "../../components/table";
-import { Auth } from "../../context/auth";
-
-import Sidebar from "../../components/Sidebar";
 import { Col, Row } from "react-bootstrap";
 import { EliminarProfesor } from "../../components/eliminarProfesor";
 import { ProfesorCreacion } from "../../components/ProfesorCreacion";
 import { ModificarProfesor } from "../../components/modificarProfesor";
+import SidebarProfesores from "../../components/SidebarProfesores";
 
 const AsignacionHome = () => {
   const db = firebase.firestore();
-  const storage = firebase.storage();
-  const { user } = useContext(Auth);
-  const history = useHistory();
   const [profesores, setProfeores] = useState(null);
 
-  useEffect(() => {
-    if (!user) {
-      history.replace("/login");
-    }
-  }, [user, history]);
+  const [loginTrue, setLogin] = useState(() => {
+    // getting stored value
+    const saved = localStorage.getItem("loginSC");
+    const initialValue = JSON.parse(saved);
+    return initialValue || "";
+  });
 
-  const handleLogout = () => {
-    firebase.auth().signOut();
-  };
+  // useEffect(() => {
+  //   if (!user) {
+  //     history.replace("/login");
+  //   }
+  // }, [user, history]);
+
+  // const handleLogout = () => {
+  //   firebase.auth().signOut();
+  // };
 
   useEffect(() => {
     (async () => {
@@ -81,11 +82,13 @@ const AsignacionHome = () => {
     },
   ];
 
+  if(loginTrue=="1"){
   return (
+    
     <div>
       <Row>
         <Col xs={2}>
-          <Sidebar />
+          <SidebarProfesores />
         </Col>
 
         <Col>
@@ -117,7 +120,12 @@ const AsignacionHome = () => {
         </Col>
       </Row>
     </div>
+        
   );
+  }else if(loginTrue=="0"){
+    <h1>Error: Vuelva a iniciar sesion.</h1>
+  }
+
 };
 
 export default AsignacionHome;
