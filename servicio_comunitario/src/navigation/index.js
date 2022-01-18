@@ -12,7 +12,6 @@ const Navigation = () => {
     <Router>
       <Switch>
         {/* ------ Colegio Page Paths ----- */}
-      
         <Route exact path="/" component={Inicio} />
         <Route path="/inicio" component={Inicio} />
         <Route path="/nosotros">

@@ -20,9 +20,7 @@ var sectionStyle = {
 };
 
 class Nosotros extends Component {
-  
   render() {
-    localStorage.clear();
     return (
       <div>
            <Navbar/>   

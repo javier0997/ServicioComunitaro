@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar";
 
 class Inicio extends Component {
   render() {
-    localStorage.clear();
+    localStorage.setItem("loginSC", "0");
     return (
       <div>
         <Navbar/>    
