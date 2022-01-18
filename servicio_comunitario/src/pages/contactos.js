@@ -17,6 +17,7 @@ var sectionStyle = {
 
 class Contactos extends Component {
   render() {
+    localStorage.clear();
     return (
       <section>
         <Navbar />
