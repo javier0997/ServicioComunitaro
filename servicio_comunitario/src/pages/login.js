@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Form, Button, Card, Container, Row, Col } from "react-bootstrap";
+import { Form, Button, Card, Container, Row, Col,Alert } from "react-bootstrap";
 import Navbar from "../components/Navbar";
 import firebase from "firebase/app";
 import { useHistory } from "react-router-dom";
@@ -17,6 +17,9 @@ export const Login = () => {
   const [emailAux, setEmailAux] = useState("");
   const [rol, setRol] = useState("");
   const [curso, setCurso] = useState("");
+  const [alerta, setAlert] = useState(false);
+
+
 
 
   const history = useHistory();
@@ -43,7 +46,7 @@ export const Login = () => {
           setPasswordAux(doc.data().contraseña);
           setCurso(doc.data().curso);
           
-          console.log(rol+" "+emailAux+" "+passwordAux+" "+curso);
+          console.log(rol+" "+emailAux+" "+passwordAux+" "+curso + " "+doc.data().correo );
 
           if (email==emailAux && password==passwordAux ){
             switch (rol) {
@@ -51,7 +54,7 @@ export const Login = () => {
                 const profesorCaracteristicas = {
                                                 'userSC': `${email}`,
                                                 'cursoSC': `${curso}`,
-                                                'loginSC': "1"
+                                                'rolSC': `${rol}`
                                               };
                 localStorage.setItem('datosUser', JSON.stringify(profesorCaracteristicas));
                 history.push("/profesores");
@@ -65,12 +68,14 @@ export const Login = () => {
                 break;
 
             }
+          }else {
+           setAlert(true)
           }
 
           
         });
       })
-      .catch((err) => {
+    /*  .catch((err) => {
                 switch (err.code) {
                   case "auth/invalid-email":
                   case "auth/user-disabled":
@@ -81,7 +86,7 @@ export const Login = () => {
                     setPasswordError(err.message);
                     break;
                 }
-              });
+              });*/
 
   };
 
@@ -153,16 +158,15 @@ export const Login = () => {
                   <br />
                   <Card.Text>
                     <Form>
-                      <Form.Group className="mb-3" controlId="formBasicEmail">
+                      <Form.Group className="mb-3" >
                         <Form.Control
                           type="email"
                           id="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          placeholder="Correo Electronico"
+                          placeholder="Nombre de usuario"
                           size="lg"
                         />
-                        <p className="errorMsg">{emailError}</p>
                       </Form.Group>
 
                       <Form.Group

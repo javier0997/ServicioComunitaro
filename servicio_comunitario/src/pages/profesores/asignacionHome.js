@@ -1,19 +1,23 @@
 import React, { useState, useEffect, useContext } from "react";
 import firebase from "firebase/app";
 import TableComponent from "../../components/table";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Alert, Button } from "react-bootstrap";
 import { EliminarProfesor } from "../../components/eliminarProfesor";
 import { ProfesorCreacion } from "../../components/ProfesorCreacion";
 import { ModificarProfesor } from "../../components/modificarProfesor";
 import SidebarProfesores from "../../components/SidebarProfesores";
+import { useHistory } from "react-router-dom";
+
 
 const AsignacionHome = () => {
   const db = firebase.firestore();
+  const history = useHistory();
   const [asignaciones, setAsig] = useState(null);
 
-
   const datosUser = JSON.parse(localStorage.getItem('datosUser'));
-  const [user, setUser] = useState(datosUser);
+  const [user, setUser] = useState(datosUser ? datosUser : {rolSC: ''} );
+  
+  
 
 
  
@@ -76,7 +80,7 @@ const AsignacionHome = () => {
     },
   ];
 
-  if(user.loginSC=="1"){
+  if(user.rolSC=="profesor"){
   return (
     
     <div>
@@ -112,9 +116,22 @@ const AsignacionHome = () => {
       </Row>
     </div>
         
-  );
-  }else if(user.loginSC=="0"){
-    <h1>Error: Vuelva a iniciar sesion.</h1>
+  )
+  }else {
+    return(
+      <div style={{ marginTop: 100, paddingInline:200 }}>
+        <Alert variant="warning">
+        <Alert.Heading>Error: Vuelva a iniciar sesion.</Alert.Heading>
+          <hr />
+          <div className="d-flex justify-content-start mt-5">
+          
+              <Button onClick={() => history.replace("/login")} variant="outline-info">
+                Iniciar sesion
+              </Button>
+            </div>
+        </Alert>
+      </div>
+    )
   }
 
 };
