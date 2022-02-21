@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/Header.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "../assets/sj.png";
@@ -7,24 +7,19 @@ import firebase from "firebase/app";
 import { Auth } from "../context/auth";
 import { useHistory } from "react-router-dom";
 
-function Sidebar() {
-  const history = useHistory();
-  const { user } = useContext(Auth);
-  const storage = firebase.storage();
+function SidebarEstudiantes() {
 
-  useEffect(() => {
-    if (!user) {
-      history.replace("/login");
-    }
-  }, [user, history]);
+  const datosUser = JSON.parse(localStorage.getItem('datosUser'));
+  const [user, setUser] = useState(datosUser ? datosUser : {nombreSC: '', apellidoSC: ''} );
 
   const handleLogout = () => {
-    firebase.auth().signOut();
+    window.location.href = "/inicio";
   };
+
   return (
     <div
-      className="Sidebar bg-secondary"
-      style={{ height: "100vh", width: 240 }}
+      className="Sidebar bg-info"
+      style={{ height: "100%", width: 240 }}
     >
       <div
         style={{
@@ -34,7 +29,29 @@ function Sidebar() {
           alignItems: "center",
         }}
       >
-        <img src={logo} alt="Logo" width="50" />
+        <img src={logo} alt="Logo" width="100" />
+      </div>
+      <div className="bg-dark">
+        <div  style={{
+              paddingTop: 0,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}>
+              <h5 style={{ paddingTop: 15 }} className="text-white">
+                    Estudiante:
+              </h5>
+        </div>
+        <div  style={{
+            paddingTop: 0,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}>
+              <h6  className="text-white">
+                {user.nombreSC} {user.apellidoSC}
+              </h6>
+        </div>
       </div>
 
       <div
@@ -45,19 +62,21 @@ function Sidebar() {
           alignItems: "center",
         }}
       >
-        <Link className="nav-link " to="/profesores">
+        <Link className="nav-link " to="/estudiantes">
+        <button type="button" class="btn btn-outline-dark " aria-pressed="true">
           <div
             style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              width:100
             }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
               height="25"
-              fill="white"
+              fill="currentColor"
               class="bi bi-file-earmark-plus"
               viewBox="0 0 16 16"
             >
@@ -65,9 +84,10 @@ function Sidebar() {
               <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
             </svg>
           </div>
-          <h5 style={{ paddingTop: 15 }} className="text-white">
-            Profesores
-          </h5>
+          <h6 style={{ paddingTop: 15 }} >
+            Asignaciones
+          </h6>
+          </button>
         </Link>
       </div>
 
@@ -79,19 +99,21 @@ function Sidebar() {
           alignItems: "center",
         }}
       >
-        <Link className="nav-link " to="/profesores/estudientas">
+        <Link className="nav-link " to="/estudiantes">
+        <button type="button" class="btn btn-outline-dark  " aria-pressed="true" >
           <div
             style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              width:100
             }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
               height="25"
-              fill="white"
+              fill="currentColor"
               class="bi bi-card-checklist"
               viewBox="0 0 16 16"
             >
@@ -99,27 +121,35 @@ function Sidebar() {
               <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
             </svg>
           </div>
-          <h5 style={{ paddingTop: 15 }} className="text-white">
-            Estudiantes
-          </h5>
+          <h6 style={{ paddingTop: 15 }} >
+            Boletas
+          </h6>
+          </button>
         </Link>
       </div>
 
       <div
         style={{
-          paddingTop: 10,
+          paddingTop: 150,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          paddingBottom: 40
         }}
       >
-        <button type="button" class="btn btn-danger" onClick={handleLogout}>
-          <div>
+        <button type="button" class="btn btn-outline-dark" onClick={handleLogout}>
+          <div 
+          style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width:100
+            }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
               height="25"
-              fill="white"
+              fill="red"
               class="bi bi-power"
               viewBox="0 0 16 16"
             >
@@ -127,13 +157,13 @@ function Sidebar() {
               <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z" />
             </svg>
           </div>
-          <h5 style={{ paddingTop: 15 }} className="text-white">
+          <h6 style={{ paddingTop: 15 }} className="text-danger">
             Cerrar Sesion
-          </h5>
+          </h6>
         </button>
       </div>
     </div>
   );
 }
 
-export default Sidebar;
+export default SidebarEstudiantes;

@@ -23,34 +23,16 @@ const Navigation = () => {
           <LoginScreen />
         </Route>
 
-        {/* ------ Profesores Paths ----- */}
+        
         <Switch>
-          {/* <Route exact path="/profesores">
-              <asignacionHome />
-            </Route> */}
+          {/* ------ Profesores Paths ----- */}
           <Route  path="/profesores" component={asignacionHome} />
 
-          <Route path="/profesores/estudientas" component={EstudiantesHome} />
+          {/* ------ Estudiantes Paths ----- */}
+          <Route path="/estudiantes" component={EstudiantesHome} />
         </Switch>
 
-        {/* ------ Administrador Paths ----- */}
 
-        <Switch>
-          <Route path="/administradorhome" component={administradorhome} />
-        </Switch>
-
-        {/* ------ Estudiantes Paths ----- */}
-        {/* <Row>
-                                <Col xs={2} >      
-                                  <Sidebar2/>
-                                </Col>
-                                <Col  xs={10} >
-                                  <Switch>
-                                      <Route path='/estudiantes' component={Contactos}/>
-                                  </Switch>
-                                </Col> 
-                             </Row>
-                    */}
       </Switch>
     </Router>
   );

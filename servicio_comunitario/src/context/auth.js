@@ -4,7 +4,7 @@ import firebase from 'firebase/app'
 export const Auth = React.createContext();
 
 export const AuthContext = ({ children }) => {
-    const [user, setUser] = useState(null);
+   /**  const [user, setUser] = useState(null);
     const [showChild, setShowChild] = useState(false);
 
     useEffect(() => {
@@ -27,5 +27,5 @@ export const AuthContext = ({ children }) => {
                 {children}
             </Auth.Provider>
         );
-    }
+    }*/
 };

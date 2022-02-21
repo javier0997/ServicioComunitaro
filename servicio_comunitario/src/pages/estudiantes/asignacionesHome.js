@@ -2,41 +2,42 @@ import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import firebase from "firebase/app";
 import TableComponent from "../../components/table";
-import { Auth } from "../../context/auth";
+import { ResponderAsignacion } from "../../components/responderAsignacion";
 
-import Sidebar from "../../components/Sidebar";
-import { Col, Row } from "react-bootstrap";
-import { EstudianteCreacion } from "../../components/EstudianteCreacion";
-import { EliminarEstudiante } from "../../components/eliminarEstudiante";
-import { ModificarEstudiante } from "../../components/modificarEstudiante";
+import SidebarEstudiantes from "../../components/SidebarEstudiantes";
+import { Col, Row, Alert, Button } from "react-bootstrap";
 
 const EstudiantesHome = () => {
   const db = firebase.firestore();
-  const storage = firebase.storage();
-  const { user } = useContext(Auth);
   const history = useHistory();
-  const [estudiantes, setEstudiantes] = useState(null);
+  const [asignaciones, setAsig] = useState(null);
 
-  useEffect(() => {
-    if (!user) {
-      history.replace("/login");
-    }
-  }, [user, history]);
+  const datosUser = JSON.parse(localStorage.getItem('datosUser'));
+  const [user, setUser] = useState(datosUser ? datosUser : {rolSC: ''} );
+  
+  
+
+
+ 
+  // const handleLogout = () => {
+  //   firebase.auth().signOut();
+  // };
 
   useEffect(() => {
     (async () => {
-      db.collection("estudiantes")
+      db.collection("asignaciones").where('curso', '==', `${user.cursoSC}`)
         .get()
         .then((snapshot) => {
-          const estudiantes = [];
+          const asignaciones = [];
           snapshot.forEach((doc) => {
             const data = doc.data();
-            estudiantes.push({
+            asignaciones.push({
               id: doc.id,
               ...data,
             });
           });
-          setEstudiantes(estudiantes);
+          setAsig(asignaciones);
+          console.log(user.cursoSC);
         })
         .catch((error) => console.log(error));
     })();
@@ -44,44 +45,42 @@ const EstudiantesHome = () => {
 
   const columns = [
     {
-      title: "Nombre",
-      field: "Nombre",
-    },
-    {
-      title: "Apellido",
-      field: "Apellido",
-    },
-    {
-      title: "Telefono",
-      field: "Telefono",
-    },
-    {
-      title: "Email",
-      field: "email",
+      title: "Asignacion",
+      field: "nombre_asignacion",
     },
     {
       title: "Curso",
-      field: "Curso",
+      field: "curso",
     },
     {
-      title: "Fecha de Nacimiento",
-      field: "Fecha_de_Nacimiento",
+      title: "Descripcion",
+      field: "descripcion",
     },
     {
-      title: "Eliminar",
-      render: (rowData) => <EliminarEstudiante data={rowData} />,
+      title: "Fecha Inicio",
+      field: "fecha_inicio",
     },
     {
-      title: "Modificar",
-      render: (rowData) => <ModificarEstudiante data={rowData} />,
+      title: "Fecha Fin",
+      field: "fecha_fin",
+    },
+    {
+      title: "Descargar",
+      field: "archivo",
+    },
+    {
+      title: "Reponder",
+      render: (rowData) => <ResponderAsignacion data={rowData} />,
     },
   ];
 
+  if(user.rolSC=="estudiante"){
   return (
+    
     <div>
       <Row>
         <Col xs={2}>
-          <Sidebar />
+          <SidebarEstudiantes />
         </Col>
 
         <Col>
@@ -93,7 +92,7 @@ const EstudiantesHome = () => {
                 justifyContent: "center",
               }}
             >
-              <h1> Tabla de Estudiantes</h1>
+              <h1>Tabla de Asignaciones</h1>
             </div>
             <br />
             <section
@@ -102,18 +101,32 @@ const EstudiantesHome = () => {
             >
               <TableComponent
                 columns={columns}
-                data={estudiantes ? estudiantes : []}
+                data={asignaciones ? asignaciones : []}
               />
             </section>
           </div>
           <br />
-          <div>
-            <EstudianteCreacion />
-          </div>
         </Col>
       </Row>
     </div>
-  );
+        
+  )
+  }else {
+    return(
+      <div style={{ marginTop: 100, paddingInline:200 }}>
+        <Alert variant="warning">
+        <Alert.Heading>Error: Vuelva a iniciar sesion.</Alert.Heading>
+          <hr />
+          <div className="d-flex justify-content-start mt-5">
+          
+              <Button onClick={() => history.replace("/login")} variant="outline-info">
+                Iniciar sesion
+              </Button>
+            </div>
+        </Alert>
+      </div>
+    )
+  }
 };
 
 export default EstudiantesHome;

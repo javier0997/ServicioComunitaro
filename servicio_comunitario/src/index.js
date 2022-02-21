@@ -24,9 +24,7 @@ firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthContext>
       <App />
-    </AuthContext>
   </React.StrictMode>,
   document.getElementById("root")
 );

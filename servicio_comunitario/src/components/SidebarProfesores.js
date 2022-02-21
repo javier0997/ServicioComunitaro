@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/Header.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "../assets/sj.png";
@@ -8,6 +8,8 @@ import { Auth } from "../context/auth";
 import { useHistory } from "react-router-dom";
 
 function SidebarProfesores() {
+  const datosUser = JSON.parse(localStorage.getItem('datosUser'));
+  const [user, setUser] = useState(datosUser ? datosUser : {nombreSC: '', apellidoSC: ''} );
 
 
   const handleLogout = () => {
@@ -17,7 +19,7 @@ function SidebarProfesores() {
   return (
     <div
       className="Sidebar bg-secondary"
-      style={{ height: "100vh", width: 240 }}
+      style={{ height: "100%", width: 240 }}
     >
       <div
         style={{
@@ -29,6 +31,29 @@ function SidebarProfesores() {
       >
         <img src={logo} alt="Logo" width="100" />
       </div>
+      <div className="bg-light border border-dark" style={{ borderBlockColor: 'beige' }} >
+        <div  style={{
+              paddingTop: 0,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}>
+              <h5 style={{ paddingTop: 15 }} className="text-dark">
+                    Profesor:
+              </h5>
+        </div>
+        <div  style={{
+            paddingTop: 0,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}>
+              <h6  className="text-dark">
+                {user.nombreSC} {user.apellidoSC}
+              </h6>
+        </div>
+      </div>
+
 
       <div
         style={{
@@ -39,7 +64,7 @@ function SidebarProfesores() {
         }}
       >
         <Link className="nav-link " to="/profesores">
-        <button type="button" class="btn btn-outline-primary " aria-pressed="true">
+        <button type="button" class="btn btn-outline-light " aria-pressed="true">
           <div
             style={{
               display: "flex",
@@ -52,7 +77,7 @@ function SidebarProfesores() {
               xmlns="http://www.w3.org/2000/svg"
               width="25"
               height="25"
-              fill="white"
+              fill="currentColor"
               class="bi bi-file-earmark-plus"
               viewBox="0 0 16 16"
             >
@@ -60,7 +85,7 @@ function SidebarProfesores() {
               <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
             </svg>
           </div>
-          <h6 style={{ paddingTop: 15 }} className="text-white">
+          <h6 style={{ paddingTop: 15 }} >
             Asignaciones
           </h6>
           </button>
@@ -76,7 +101,7 @@ function SidebarProfesores() {
         }}
       >
         <Link className="nav-link " to="/profesores/estudientas">
-        <button type="button" class="btn btn-outline-primary  " aria-pressed="true" >
+        <button type="button" class="btn btn-outline-light  " aria-pressed="true" >
           <div
             style={{
               display: "flex",
@@ -89,7 +114,7 @@ function SidebarProfesores() {
               xmlns="http://www.w3.org/2000/svg"
               width="25"
               height="25"
-              fill="white"
+              fill="currentColor"
               class="bi bi-card-checklist"
               viewBox="0 0 16 16"
             >
@@ -97,7 +122,7 @@ function SidebarProfesores() {
               <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
             </svg>
           </div>
-          <h6 style={{ paddingTop: 15 }} className="text-white">
+          <h6 style={{ paddingTop: 15 }} >
             Boletas
           </h6>
           </button>
@@ -106,10 +131,11 @@ function SidebarProfesores() {
 
       <div
         style={{
-          paddingTop: 200,
+          paddingTop: 150,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          paddingBottom: 40
         }}
       >
         <button type="button" class="btn btn-outline-danger" onClick={handleLogout}>
