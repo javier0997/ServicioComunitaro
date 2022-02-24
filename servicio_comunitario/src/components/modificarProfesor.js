@@ -19,24 +19,20 @@ import "react-datepicker/dist/react-datepicker.css";
 export const ModificarProfesor = (props) => {
   const db = firebase.firestore();
 
-  const schema = yup.object().shape({
-    email: yup
-      .string()
-      .email("Formato de Email no valido!")
-      .required("requerido"),
-  });
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate2, setSelectedDate2] = useState(null);
+
+
+ 
 
   const [isLoading, setIsLoading] = useState(false);
   const [id, setId] = useState(null);
 
-  const {
-    watch,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+  const { watch, register, handleSubmit } = useForm();
+
+   const datosUser = JSON.parse(localStorage.getItem("datosUser"));
+  const [user, setUser] = useState(datosUser ? datosUser : { rolSC: "" });
+
 
   const [open, setOpen] = useState(false);
 
@@ -51,21 +47,34 @@ export const ModificarProfesor = (props) => {
   const onSubmit = async (data) => {
     try {
       setIsLoading(true);
-      const usuarioupdate = db.collection("profesores");
+      const usuarioupdate = db.collection("asignaciones");
+      const storageRef = firebase.storage().ref();
 
+      const fileList = [];
+      for await (const file of data.archivo) {
+        const fileName = Date.now() + "-" + file.name;
+        const fileRef = storageRef.child(fileName);
+        await fileRef.put(file);
+        fileList.push({
+          fileName: file.name,
+          bucketFileName: fileName,
+        });
+      }
+      
       await usuarioupdate.doc(props.data.id).update({
-        Nombre: data.Nombre,
-        Apellido: data.Apellido,
-        Telefono: data.Telefono,
-        email: data.email,
-        Seccion: data.Seccion,
-        Cedula: data.Cedula,
+        nombre_asignacion: data.nombre_asignacion,
+        profesor_user: user.userSC,
+        fecha_inicio: selectedDate.toLocaleDateString(),
+        fecha_fin: selectedDate2.toLocaleDateString(),
+        curso: user.cursoSC,
+        descripcion: data.descripcion,
+        archivo: fileList,
       });
       window.location.reload();
       alert("Profesor modificado con Exito!");
     } catch (error) {
       console.log(error);
-      alert("Error! No se pudo modificar un profesor!");
+      alert("Error! No se pudo modifiassacar un profesor!");
       setIsLoading(false);
     }
   };
@@ -95,36 +104,35 @@ export const ModificarProfesor = (props) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Editar un Profesor"}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Modificar Asignacion"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <div className="grid grid-cols-1 md:grid-cols-1">
               <form className="form-group mt-3">
-                <div className="row">
+              <div className="row">
                   <div className="col">
-                    <input
-                      type="text"
-                      name="Nombre"
-                      id="Nombre"
+                    <DatePicker
+                      selected={selectedDate}
+                      onChange={(date) => setSelectedDate(date)}
+                      dateFormat="dd/MM/yyyy"
+                      minDate={new Date()}
+                      isClearable
+                      locale="es"
+                      placeholderText="Fecha Inicio"
                       className="form-control"
-                      placeholder="Nombre"
-                      {...register("Nombre", {
-                        required: true,
-                      })}
                     />
                   </div>
                   <div className="col">
-                    <input
-                      type="text"
-                      name="Apellido"
-                      id="Apellido"
+                    <DatePicker
+                      selected={selectedDate2}
+                      onChange={(date) => setSelectedDate2(date)}
+                      dateFormat="dd/MM/yyyy"
+                      minDate={new Date()}
+                      isClearable
+                      locale="es"
+                      placeholderText="Fecha Fin"
                       className="form-control"
-                      placeholder="Apellido"
-                      {...register("Apellido", {
-                        required: true,
-                      })}
+                      class="btn btn-secondary"
                     />
                   </div>
                 </div>
@@ -133,79 +141,57 @@ export const ModificarProfesor = (props) => {
                   <div className="col">
                     <input
                       type="text"
-                      name="Telefono"
-                      id="Telefono"
+                      name="nombre_asignacion"
+                      id="nombre_asignacion"
                       className="form-control"
-                      placeholder="Telefono"
-                      {...register("Telefono", {
+                      placeholder="Nombre de la Asignacion"
+                      {...register("nombre_asignacion", {
                         required: true,
                       })}
                     />
                   </div>
+                </div>
+                 <br />
+                <div className="row">
                   <div className="col">
                     <input
-                      type="email"
-                      name="email"
-                      id="email"
+                      type="file"
+                      name="archivo"
+                      id="archivo"
                       className="form-control"
-                      placeholder="Correo Electronico"
-                      {...register("email", {
+                      placeholder="Archivo"
+                      isClearable
+                      {...register("archivo", {
                         required: true,
                       })}
                     />
-                    <ErrorMessage errors={errors} name="email" />
+                  </div>
+                </div>
+                <br /> 
 
-                    <ErrorMessage
-                      errors={errors}
-                      name="email"
-                      render={({ message }) => (
-                        <p>Ejemplo de formata de Email: example@domain.com</p>
-                      )}
-                    />
-                  </div>
-                </div>
-                <br />
                 <div className="row">
                   <div className="col">
-                    <select
-                      className="custom-select"
-                      id="inlineFormCustomSelect"
-                      name="Seccion"
-                      {...register("Seccion", {
-                        required: true,
-                      })}
-                    >
-                      <option>Seleccione el Curso</option>
-                      <option>Primer Grado</option>
-                      <option>Segundo Grado</option>
-                      <option>Tercer Grado</option>
-                      <option>Cuarto Grado</option>
-                      <option>Quinto Grado</option>
-                      <option>Sexto Grado</option>
-                    </select>
-                  </div>
-                  <div className="col">
-                    <input
-                      type="text"
-                      name="Cedula"
-                      id="Cedula"
+                    <textarea
                       className="form-control"
-                      placeholder="Cedula"
-                      {...register("Cedula", {
+                      id="validationTextarea"
+                      placeholder="Descripcion de la Asignacion"
+                      {...register("descripcion", {
                         required: true,
                       })}
-                    />
+                    ></textarea>
                   </div>
                 </div>
                 <br />
-                <div>
-                  <button
-                    type="button"
-                    onClick={handleSubmit(onSubmit)}
-                    class="btn btn-secondary"
-                  >
-                    Modificar
-                  </button>
+
+                <div className="row">
+                    <button
+                      type="button"
+                      onClick={handleSubmit(onSubmit)}
+                      class="btn btn-outline-secondary btn-lg btn-block "
+                    >
+                      Modificar
+                    </button>
+          
                 </div>
               </form>
             </div>
