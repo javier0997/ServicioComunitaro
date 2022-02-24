@@ -8,11 +8,10 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-export const FilesDialog = ({ data }) => {
+export const DescriptionDialog = ( props ) => {
   const storage = firebase.storage();
 
   const [open, setOpen] = useState(false);
-  const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleClickOpen = () => {
@@ -23,26 +22,7 @@ export const FilesDialog = ({ data }) => {
     setOpen(false);
   };
 
-  useEffect(() => {
-    fetchUrls(data);
-  }, []);
-
-  const fetchUrls = async (data) => {
-    try {
-      const fileList = [];
-      for await (const file of data.archivo) {
-        const storageRef = storage.ref(file.bucketFileName);
-        const url = await storageRef.getDownloadURL();
-        fileList.push({
-          url,
-          fileName: file.fileName,
-        });
-      }
-      setFiles(fileList);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
 
   return (
     <div>
@@ -52,11 +32,11 @@ export const FilesDialog = ({ data }) => {
           width="20"
           height="20"
           fill="currentColor"
-          class="bi bi-file-earmark-arrow-down"
+          class="bi bi-card-text"
           viewBox="0 0 16 16"
         >
-          <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293V6.5z" />
-          <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
+          <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+          <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z" />
         </svg>
       </button>
       <Dialog
@@ -65,21 +45,19 @@ export const FilesDialog = ({ data }) => {
         aria-labelledby="alert-dialog-title"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Archivo de la Asignacion"}
+          {"Descripcion de la Asignacion"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {files.map((file) => (
+            
               <p>
                 <a
-                  className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
-                  href={file.url}
                   target="_blank"
                 >
-                  {file.fileName}
+                  {props.data.descripcion}
                 </a>
               </p>
-            ))}
+        
           </DialogContentText>
         </DialogContent>
         <DialogActions>

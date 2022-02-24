@@ -6,6 +6,7 @@ import { EliminarAsignacion } from "../../components/eliminarAsignacion";
 import { ProfesorCreacion } from "../../components/ProfesorCreacion";
 import { ModificarProfesor } from "../../components/modificarProfesor";
 import { FilesDialog } from "../../components/FilesDialog";
+import { DescriptionDialog } from "../../components/DescriptionDialog";
 import { CrearAsignacion } from "../../components/CrearAsignacion";
 import SidebarProfesores from "../../components/SidebarProfesores";
 import { useHistory } from "react-router-dom";
@@ -51,16 +52,17 @@ const AsignacionHome = () => {
             color: 'white'
           },
     },
-    {
-      title: "Curso",
-      field: "curso",
-      headerStyle: {
-        backgroundColor: 'gray',
-        color: 'white'
-      },
-    },
+    // {
+    //   title: "Curso",
+    //   field: "curso",
+    //   headerStyle: {
+    //     backgroundColor: 'gray',
+    //     color: 'white'
+    //   },
+    // },
     {
       title: "Descripcion",
+      render: (rowData) => <DescriptionDialog data={rowData} />,
       field: "descripcion",
       headerStyle: {
         backgroundColor: 'gray',
