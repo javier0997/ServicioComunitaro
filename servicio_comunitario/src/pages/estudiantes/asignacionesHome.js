@@ -16,16 +16,9 @@ const EstudiantesHome = () => {
   const [user, setUser] = useState(datosUser ? datosUser : {rolSC: ''} );
   
   
-
-
- 
-  // const handleLogout = () => {
-  //   firebase.auth().signOut();
-  // };
-
   useEffect(() => {
     (async () => {
-      db.collection("asignaciones").where('curso', '==', `${user.cursoSC}`)
+      db.collection("asignaciones").where("curso", "==", `${user.cursoSC}`)
         .get()
         .then((snapshot) => {
           const asignaciones = [];

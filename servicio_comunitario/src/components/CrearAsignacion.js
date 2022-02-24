@@ -30,6 +30,9 @@ export const CrearAsignacion = (props) => {
       .required("requerido"),
   });
 
+  const datosUser = JSON.parse(localStorage.getItem("datosUser"));
+  const [user, setUser] = useState(datosUser ? datosUser : { rolSC: "" });
+
   const [isLoading, setIsLoading] = useState(false);
   const [id, setId] = useState(null);
 
@@ -67,10 +70,10 @@ export const CrearAsignacion = (props) => {
 
       await db.collection("asignaciones").doc().set({
         nombre_asignacion: data.nombre_asignacion,
-        profesor_user: data.profesor_user,
+        profesor_user: user.userSC,
         fecha_inicio: selectedDate.toLocaleDateString(),
         fecha_fin: selectedDate2.toLocaleDateString(),
-        curso: data.curso,
+        curso: user.cursoSC,
         descripcion: data.descripcion,
         archivo: fileList,
       });
@@ -144,18 +147,6 @@ export const CrearAsignacion = (props) => {
                       })}
                     />
                   </div>
-                  <div className="col">
-                    <input
-                      type="text"
-                      name="profesor_user"
-                      id="profesor_user"
-                      className="form-control"
-                      placeholder="Profesor"
-                      {...register("profesor_user", {
-                        required: true,
-                      })}
-                    />
-                  </div>
                 </div>
                 <br />
                 <div className="row">
@@ -190,34 +181,14 @@ export const CrearAsignacion = (props) => {
                 <br />
 
                 <div className="row">
-                  <div className="col">
-                    <select
-                      className="form-control"
-                      class="btn btn-secondary"
-                      id="inlineFormCustomSelect"
-                      name="curso"
-                      {...register("curso", {
-                        required: true,
-                      })}
-                    >
-                      <option>Seleccione el Curso</option>
-                      <option>Primer Grado</option>
-                      <option>Segundo Grado</option>
-                      <option>Tercer Grado</option>
-                      <option>Cuarto Grado</option>
-                      <option>Quinto Grado</option>
-                      <option>Sexto Grado</option>
-                    </select>
-                  </div>
-                  <div className="col" style={{ paddingLeft: 200 }}>
                     <button
                       type="button"
                       onClick={handleSubmit(onSubmit)}
-                      class="btn btn-secondary"
+                      class="btn btn-outline-secondary btn-lg btn-block "
                     >
                       Crear
                     </button>
-                  </div>
+          
                 </div>
               </form>
             </div>

@@ -24,9 +24,7 @@ const AsignacionHome = () => {
 
   useEffect(() => {
     (async () => {
-      db.collection("asignaciones")
-        // .where("profesor_user", "==", `${user.userSC}`)
-        // .where("curso", "==", `${user.cursoSC}`)
+      db.collection("asignaciones").where("profesor_user", "==", `${user.userSC}`).where("curso", "==", `${user.cursoSC}`)
         .get()
         .then((snapshot) => {
           const asignaciones = [];
@@ -48,38 +46,69 @@ const AsignacionHome = () => {
     {
       title: "Asignacion",
       field: "nombre_asignacion",
-    },
-    {
-      title: "Profesor",
-      field: "profesor_user",
+      headerStyle: {
+            backgroundColor: 'gray',
+            color: 'white'
+          },
     },
     {
       title: "Curso",
       field: "curso",
+      headerStyle: {
+        backgroundColor: 'gray',
+        color: 'white'
+      },
     },
     {
       title: "Descripcion",
       field: "descripcion",
+      headerStyle: {
+        backgroundColor: 'gray',
+        color: 'white'
+      },
+      cellStyle: {
+        //maxLenght:50
+      }
     },
     {
       title: "Fecha Inicio",
       field: "fecha_inicio",
+      headerStyle: {
+        backgroundColor: 'gray',
+        color: 'white'
+      },
     },
     {
       title: "Fecha Fin",
       field: "fecha_fin",
+      headerStyle: {
+        backgroundColor: 'gray',
+        color: 'white'
+      },
     },
     {
       title: "Descargar",
-      render: (rowData) => <FilesDialog data={rowData} />
+      render: (rowData) => <FilesDialog data={rowData} />,
+      headerStyle: {
+        backgroundColor: 'gray',
+        color: 'white'
+      },
     },
     {
       title: "Eliminar",
       render: (rowData) => <EliminarAsignacion data={rowData} />,
+      headerStyle: {
+        backgroundColor: 'gray',
+        color: 'white'
+      },
     },
     {
       title: "Modificar",
       render: (rowData) => <ModificarProfesor data={rowData} />,
+      headerStyle: {
+        backgroundColor: 'gray',
+        color: 'white'
+      },
     },
   ];
 
@@ -104,7 +133,7 @@ const AsignacionHome = () => {
               </div>
               <br />
               <section
-                style={{ paddingRight: 20 }}
+                style={{ paddingRight: 20,  }}
                 className="md:container mx-auto"
               >
                 <TableComponent
