@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import firebase from "firebase/app";
 import TableComponent from "../../components/table";
 import { Col, Row, Alert, Button } from "react-bootstrap";
-import { EliminarProfesor } from "../../components/eliminarProfesor";
+import { EliminarAsignacion } from "../../components/eliminarAsignacion";
 import { ProfesorCreacion } from "../../components/ProfesorCreacion";
 import { ModificarProfesor } from "../../components/modificarProfesor";
 import { FilesDialog } from "../../components/FilesDialog";
@@ -75,7 +75,7 @@ const AsignacionHome = () => {
     },
     {
       title: "Eliminar",
-      render: (rowData) => <EliminarProfesor data={rowData} />,
+      render: (rowData) => <EliminarAsignacion data={rowData} />,
     },
     {
       title: "Modificar",

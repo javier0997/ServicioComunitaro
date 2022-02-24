@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "firebase/auth";
 import firebase from "firebase/app";
 
-export const EliminarProfesor = (props) => {
+export const EliminarAsignacion = (props) => {
   const db = firebase.firestore();
 
   const [open, setOpen] = useState(false);
@@ -25,11 +25,11 @@ export const EliminarProfesor = (props) => {
   const handleClick = async () => {
     console.log(props);
     try {
-      await db.collection("profesores").doc(props.data.id).delete();
+      await db.collection("asignaciones").doc(props.data.id).delete();
       window.location.reload();
     } catch (error) {
       console.log(error);
-      alert("Profesor Eliminado");
+      alert("Asignacion Eliminada");
     }
   };
 
@@ -59,7 +59,7 @@ export const EliminarProfesor = (props) => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle style={{ fontFamily: "cabin" }}>
-          {"Seguro desea eliminar al Profesor ?"}
+          {"Seguro desea eliminar esta Asignacion ?"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">

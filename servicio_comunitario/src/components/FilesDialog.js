@@ -82,7 +82,7 @@ export const FilesDialog = ({ data }) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Back
+            Atras
           </Button>
         </DialogActions>
       </Dialog>
