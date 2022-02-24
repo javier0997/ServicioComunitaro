@@ -71,7 +71,7 @@ export const CrearAsignacion = (props) => {
         fecha_inicio: selectedDate.toLocaleDateString(),
         fecha_fin: selectedDate2.toLocaleDateString(),
         curso: data.curso,
-        description: data.description,
+        descripcion: data.descripcion,
         archivo: fileList,
       });
       setIsLoading(false);
@@ -181,7 +181,7 @@ export const CrearAsignacion = (props) => {
                       className="form-control"
                       id="validationTextarea"
                       placeholder="Descripcion de la Asignacion"
-                      {...register("description", {
+                      {...register("descripcion", {
                         required: true,
                       })}
                     ></textarea>

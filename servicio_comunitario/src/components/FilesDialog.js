@@ -64,7 +64,7 @@ export const FilesDialog = ({ data }) => {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
       >
-        <DialogTitle id="alert-dialog-title">{"Files"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Archivo de la Asignacion"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             {files.map((file) => (
