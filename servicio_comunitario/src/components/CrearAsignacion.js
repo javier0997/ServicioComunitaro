@@ -36,14 +36,7 @@ export const CrearAsignacion = (props) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedDate2, setSelectedDate2] = useState(null);
 
-  const {
-    watch,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+  const { watch, register, handleSubmit } = useForm();
 
   const [open, setOpen] = useState(false);
 
@@ -58,21 +51,35 @@ export const CrearAsignacion = (props) => {
   const onSubmit = async (data) => {
     try {
       setIsLoading(true);
-      const usuarioupdate = db.collection("asignaciones");
+      const storageRef = firebase.storage().ref();
+      console.log(data);
 
-      await usuarioupdate.doc(props.data.id).update({
+      const fileList = [];
+      for await (const file of data.archivo) {
+        const fileName = Date.now() + "-" + file.name;
+        const fileRef = storageRef.child(fileName);
+        await fileRef.put(file);
+        fileList.push({
+          fileName: file.name,
+          bucketFileName: fileName,
+        });
+      }
+
+      await db.collection("asignaciones").doc().set({
         nombre_asignacion: data.nombre_asignacion,
-        Apellido: data.Apellido,
-        Telefono: data.Telefono,
-        email: data.email,
-        Seccion: data.Seccion,
-        Cedula: data.Cedula,
+        profesor_user: data.profesor_user,
+        fecha_inicio: selectedDate.toLocaleDateString(),
+        fecha_fin: selectedDate2.toLocaleDateString(),
+        curso: data.curso,
+        description: data.description,
+        archivo: fileList,
       });
+      setIsLoading(false);
       window.location.reload();
-      alert("Profesor modificado con Exito!");
+      alert("Asignacion creada con Exito!");
     } catch (error) {
       console.log(error);
-      alert("Error! No se pudo modificar un profesor!");
+      alert("Error! No se pudo crea la Asignacion");
       setIsLoading(false);
     }
   };
@@ -108,16 +115,6 @@ export const CrearAsignacion = (props) => {
                       placeholderText="Fecha Inicio"
                       className="form-control"
                     />
-                    {/* <input
-                      type="text"
-                      name="Telefono"
-                      id="Telefono"
-                      className="form-control"
-                      placeholder="Fecha Inicio"
-                      {...register("Telefono", {
-                        required: true,
-                      })}
-                    /> */}
                   </div>
                   <div className="col">
                     <DatePicker
@@ -131,25 +128,6 @@ export const CrearAsignacion = (props) => {
                       className="form-control"
                       class="btn btn-secondary"
                     />
-                    {/* <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      className="form-control"
-                      placeholder="Fecha Fin"
-                      {...register("email", {
-                        required: true,
-                      })}
-                    />
-                    <ErrorMessage errors={errors} name="email" />
-
-                    <ErrorMessage
-                      errors={errors}
-                      name="email"
-                      render={({ message }) => (
-                        <p>Ejemplo de formata de Email: example@domain.com</p>
-                      )}
-                    /> */}
                   </div>
                 </div>
                 <br />
@@ -169,11 +147,11 @@ export const CrearAsignacion = (props) => {
                   <div className="col">
                     <input
                       type="text"
-                      name="Apellido"
-                      id="Apellido"
+                      name="profesor_user"
+                      id="profesor_user"
                       className="form-control"
                       placeholder="Profesor"
-                      {...register("Apellido", {
+                      {...register("profesor_user", {
                         required: true,
                       })}
                     />
@@ -184,12 +162,12 @@ export const CrearAsignacion = (props) => {
                   <div className="col">
                     <input
                       type="file"
-                      name="Cedula"
-                      id="Cedula"
+                      name="archivo"
+                      id="archivo"
                       className="form-control"
                       placeholder="Archivo"
                       isClearable
-                      {...register("Cedula", {
+                      {...register("archivo", {
                         required: true,
                       })}
                     />
@@ -203,7 +181,9 @@ export const CrearAsignacion = (props) => {
                       className="form-control"
                       id="validationTextarea"
                       placeholder="Descripcion de la Asignacion"
-                      required
+                      {...register("description", {
+                        required: true,
+                      })}
                     ></textarea>
                   </div>
                 </div>
@@ -215,8 +195,8 @@ export const CrearAsignacion = (props) => {
                       className="form-control"
                       class="btn btn-secondary"
                       id="inlineFormCustomSelect"
-                      name="Seccion"
-                      {...register("Seccion", {
+                      name="curso"
+                      {...register("curso", {
                         required: true,
                       })}
                     >

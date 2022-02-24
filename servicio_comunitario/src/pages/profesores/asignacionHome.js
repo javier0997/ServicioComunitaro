@@ -5,6 +5,7 @@ import { Col, Row, Alert, Button } from "react-bootstrap";
 import { EliminarProfesor } from "../../components/eliminarProfesor";
 import { ProfesorCreacion } from "../../components/ProfesorCreacion";
 import { ModificarProfesor } from "../../components/modificarProfesor";
+import { FilesDialog } from "../../components/FilesDialog";
 import { CrearAsignacion } from "../../components/CrearAsignacion";
 import SidebarProfesores from "../../components/SidebarProfesores";
 import { useHistory } from "react-router-dom";
@@ -24,8 +25,8 @@ const AsignacionHome = () => {
   useEffect(() => {
     (async () => {
       db.collection("asignaciones")
-        .where("profesor_user", "==", `${user.userSC}`)
-        .where("curso", "==", `${user.cursoSC}`)
+        // .where("profesor_user", "==", `${user.userSC}`)
+        // .where("curso", "==", `${user.cursoSC}`)
         .get()
         .then((snapshot) => {
           const asignaciones = [];
@@ -70,7 +71,7 @@ const AsignacionHome = () => {
     },
     {
       title: "Descargar",
-      field: "archivo",
+      render: (rowData) => <FilesDialog data={rowData} />
     },
     {
       title: "Eliminar",
