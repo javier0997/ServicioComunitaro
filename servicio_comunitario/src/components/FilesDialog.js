@@ -46,7 +46,7 @@ export const FilesDialog = ({ data }) => {
 
   return (
     <div>
-      <button type="button" onClick={handleClickOpen} class="btn btn-light">
+      <button type="button" onClick={handleClickOpen} class="btn btn-outline-info">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"

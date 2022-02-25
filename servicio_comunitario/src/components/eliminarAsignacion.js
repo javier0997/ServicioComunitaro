@@ -35,12 +35,12 @@ export const EliminarAsignacion = (props) => {
 
   return (
     <div>
-      <button type="button" onClick={handleClickOpen} class="btn btn-light">
+      <button type="button" onClick={handleClickOpen} class="btn btn-outline-danger">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
           height="20"
-          fill="red"
+          fill="currentColor"
           class="bi bi-trash"
           viewBox="0 0 16 16"
         >

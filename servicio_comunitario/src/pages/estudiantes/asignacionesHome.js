@@ -6,6 +6,10 @@ import { ResponderAsignacion } from "../../components/responderAsignacion";
 
 import SidebarEstudiantes from "../../components/SidebarEstudiantes";
 import { Col, Row, Alert, Button } from "react-bootstrap";
+import { FilesDialog } from "../../components/FilesDialog";
+import { DescriptionDialog } from "../../components/DescriptionDialog";
+
+
 
 const EstudiantesHome = () => {
   const db = firebase.firestore();
@@ -40,30 +44,53 @@ const EstudiantesHome = () => {
     {
       title: "Asignacion",
       field: "nombre_asignacion",
+      headerStyle: {
+        backgroundColor: '#00BFFF',
+      },
     },
-    {
+    /*{
       title: "Curso",
       field: "curso",
-    },
+      headerStyle: {
+        backgroundColor: '#00BFFF',
+      },
+    },*/
     {
       title: "Descripcion",
+      render: (rowData) => <DescriptionDialog data={rowData} />,
       field: "descripcion",
+      headerStyle: {
+        backgroundColor: '#00BFFF',
+      }
     },
     {
       title: "Fecha Inicio",
       field: "fecha_inicio",
+      headerStyle: {
+        backgroundColor: '#00BFFF',
+      },
     },
     {
       title: "Fecha Fin",
       field: "fecha_fin",
+      headerStyle: {
+        backgroundColor: '#00BFFF',
+      },
     },
     {
       title: "Descargar",
-      field: "archivo",
+      render: (rowData) => <FilesDialog data={rowData} />,
+      headerStyle: {
+        backgroundColor: '#00BFFF',
+        maxWidth:20
+      } 
     },
     {
       title: "Reponder",
       render: (rowData) => <ResponderAsignacion data={rowData} />,
+      headerStyle: {
+        backgroundColor: '#00BFFF',
+      },
     },
   ];
 

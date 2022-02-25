@@ -81,12 +81,12 @@ export const ModificarProfesor = (props) => {
 
   return (
     <div >
-      <button type="button" onClick={handleClickOpen} class="btn btn-light">
+      <button type="button" onClick={handleClickOpen} class="btn btn-outline-secondary">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
           height="20"
-          fill="blue"
+          fill="currentColor"
           class="bi bi-pencil-square"
           viewBox="0 0 16 16"
         >

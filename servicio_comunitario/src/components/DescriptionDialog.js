@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import firebase from "firebase/app";
 
-import Button from "@material-ui/core/Button";
+
+import { Button } from "react-bootstrap";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+
 
 export const DescriptionDialog = ( props ) => {
   const storage = firebase.storage();
@@ -45,7 +47,7 @@ export const DescriptionDialog = ( props ) => {
         aria-labelledby="alert-dialog-title"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Descripcion de la Asignacion"}
+          {"Descripcion de la asignacion:"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -61,7 +63,7 @@ export const DescriptionDialog = ( props ) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} variant="outline-success">
             Atras
           </Button>
         </DialogActions>

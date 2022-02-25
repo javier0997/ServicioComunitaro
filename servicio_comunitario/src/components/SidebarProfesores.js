@@ -52,6 +52,16 @@ function SidebarProfesores() {
                 {user.nombreSC} {user.apellidoSC}
               </h6>
         </div>
+        <div  style={{
+            paddingTop: 0,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}>
+              <h6  className="text-dark">
+                {user.cursoSC} 
+              </h6>
+        </div>
       </div>
 
 
