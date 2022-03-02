@@ -12,6 +12,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.24.0",
+    "boostrap": "^2.0.0",
     "bootstrap": "^5.1.1",
     "firebase": "^8.0.0-2020926155854",
     "firebase-tools": "^8.0.0",
@@ -25,6 +26,7 @@
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "reactfire": "^4.0.0-rc.2",
+    "reactstrap": "^9.0.1",
     "web-vitals": "^1.1.2",
     "yup": "^0.32.11"
   },

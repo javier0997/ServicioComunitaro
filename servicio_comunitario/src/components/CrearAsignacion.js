@@ -14,6 +14,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import DatePicker from "react-datepicker";
 
+import Loading from "../components/Loading";
+
+
 import "react-datepicker/dist/react-datepicker.css";
 
 import { registerLocale, setDefaultLocale } from "react-datepicker";
@@ -181,14 +184,15 @@ export const CrearAsignacion = (props) => {
                 <br />
 
                 <div className="row">
+                  <div className="col">
                     <button
                       type="button"
                       onClick={handleSubmit(onSubmit)}
-                      class="btn btn-outline-secondary btn-lg btn-block "
+                      className="form-control btn-outline-secondary "
                     >
                       Crear
                     </button>
-          
+                  </div>
                 </div>
               </form>
             </div>
