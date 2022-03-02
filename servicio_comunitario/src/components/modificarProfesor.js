@@ -66,25 +66,13 @@ export const ModificarProfesor = (props) => {
     try {
       setIsLoading(true);
       const usuarioupdate = db.collection("asignaciones");
-      const storageRef = firebase.storage().ref();
-
-      const fileList = [];
-      for await (const file of data.archivo) {
-        const fileName = Date.now() + "-" + file.name;
-        const fileRef = storageRef.child(fileName);
-        await fileRef.put(file);
-        fileList.push({
-          fileName: file.name,
-          bucketFileName: fileName,
-        });
-      }
 
       await usuarioupdate.doc(props.data.id).update({
-        nombre_asignacion: data.nombre_asignacion || props.data.nombre_asignacion,
-        fecha_inicio: selectedDate?.toLocaleDateString() || props.data.fecha_inicio,
-        fecha_fin: selectedDate2?.toLocaleDateString() || props.data.fecha_fin,
+        nombre_asignacion:
+          data.nombre_asignacion || props.data.nombre_asignacion,
+        fecha_inicio: selectedDate?.toLocaleDateString('en-GB') || props.data.fecha_inicio,
+        fecha_fin: selectedDate2?.toLocaleDateString('en-GB') || props.data.fecha_fin,
         descripcion: data.descripcion || props.data.descripcion,
-        archivo:fileList ,
       });
       setIsLoading(false);
       window.location.reload();
@@ -152,7 +140,7 @@ export const ModificarProfesor = (props) => {
                       selected={selectedDate2}
                       onChange={(date) => setSelectedDate2(date)}
                       dateFormat="dd/MM/yyyy"
-                      minDate={new Date()}
+                      minDate={selectedDate}
                       isClearable
                       locale="es"
                       placeholderText={props.data.fecha_fin}
@@ -180,27 +168,6 @@ export const ModificarProfesor = (props) => {
                 <br />
                 <div className="row">
                   <div className="col">
-                    {files.map((file) => (
-                      <label>Archivo: {file.fileName}</label>
-                    ))}
-
-                    <input
-                      type="file"
-                      name="archivo"
-                      id="archivo"
-                      className="form-control"
-                      placeholder="Archivo"
-                      isClearable
-                      {...register("archivo", {
-                        required: false,
-                      })}
-                    />
-                  </div>
-                </div>
-                <br />
-
-                <div className="row">
-                  <div className="col">
                     <label>Descripcion de la Asignacion:</label>
                     <textarea
                       className="form-control"
@@ -210,6 +177,15 @@ export const ModificarProfesor = (props) => {
                         required: false,
                       })}
                     ></textarea>
+                  </div>
+                </div>
+                <br />
+
+                <div className="row">
+                  <div className="col">
+                    {files.map((file) => (
+                      <label>Archivo: {file.fileName}</label>
+                    ))}
                   </div>
                 </div>
                 <br />

@@ -74,8 +74,8 @@ export const CrearAsignacion = (props) => {
       await db.collection("asignaciones").doc().set({
         nombre_asignacion: data.nombre_asignacion,
         profesor_user: user.userSC,
-        fecha_inicio: selectedDate.toLocaleDateString(),
-        fecha_fin: selectedDate2.toLocaleDateString(),
+        fecha_inicio: selectedDate.toLocaleDateString('en-GB'),
+        fecha_fin: selectedDate2.toLocaleDateString('en-GB'),
         curso: user.cursoSC,
         descripcion: data.descripcion,
         archivo: fileList,
@@ -127,7 +127,7 @@ export const CrearAsignacion = (props) => {
                       selected={selectedDate2}
                       onChange={(date) => setSelectedDate2(date)}
                       dateFormat="dd/MM/yyyy"
-                      minDate={new Date()}
+                      minDate={selectedDate}
                       isClearable
                       locale="es"
                       placeholderText="Fecha Fin"
