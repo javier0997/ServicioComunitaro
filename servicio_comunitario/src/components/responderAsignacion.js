@@ -16,11 +16,11 @@ export const ResponderAsignacion = (props) => {
   const db = firebase.firestore();
 
   const schema = yup.object().shape({
-    email: yup
-      .string()
-      .email("Formato de Email no valido!")
-      .required("requerido"),
+    
   });
+
+  const datosUser = JSON.parse(localStorage.getItem("datosUser"));
+  const [user, setUser] = useState(datosUser ? datosUser : { rolSC: "" });
 
   const [isLoading, setIsLoading] = useState(false);
   const [id, setId] = useState(null);
@@ -47,21 +47,45 @@ export const ResponderAsignacion = (props) => {
   const onSubmit = async (data) => {
     try {
       setIsLoading(true);
-      const usuarioupdate = db.collection("profesores");
+      const storageRef = firebase.storage().ref();
+      console.log(data);
 
-      await usuarioupdate.doc(props.data.id).update({
-        Nombre: data.Nombre,
-        Apellido: data.Apellido,
-        Telefono: data.Telefono,
-        email: data.email,
-        Seccion: data.Seccion,
-        Cedula: data.Cedula,
+      let nombre_completo = user.nombreSC+' '+user.apellidoSC;
+
+      let date = new Date()
+      let day = date.getDate()
+      let month = date.getMonth() + 1
+      let year = date.getFullYear()
+      let hora = date.getHours()
+      let min = date.getMinutes()
+      let fecha = day+'/'+month+'/'+year+' '+hora+':'+min;
+
+      const fileList = [];
+      for await (const file of data.archivo) {
+        const fileName = Date.now() + "-" + file.name;
+        const fileRef = storageRef.child(fileName);
+        await fileRef.put(file);
+        fileList.push({
+          fileName: file.name,
+          bucketFileName: fileName,
+        });
+      }
+
+      await db.collection("respuesta_asignaciones").doc().set({
+        nombre_asignacion: props.data.nombre_asignacion,
+        nombre_estudiante: nombre_completo,
+        user_estudiante: user.userSC,
+        user_profesor: props.data.profesor_user,
+        curso: user.cursoSC,
+        fecha_respuesta: fecha,
+        archivo_respuesta: fileList,
       });
+      setIsLoading(false);
       window.location.reload();
-      alert("Profesor modificado con Exito!");
+      alert("Asignacion respondida con exito!");
     } catch (error) {
       console.log(error);
-      alert("Error! No se pudo modificar un profesor!");
+      alert("Error: No se pudo responder la asignacion");
       setIsLoading(false);
     }
   };
@@ -87,38 +111,35 @@ export const ResponderAsignacion = (props) => {
           <DialogContentText id="alert-dialog-description">
             <div className="grid grid-cols-1 md:grid-cols-1">
               <form className="form-group mt-3">
-                <br />
+              
                 <div className="row mx-auto" >
-                  <div >
-                    <select
-                      className="custom-select"
-                      id="inlineFormCustomSelect"
-                      name="Seccion"
-                      {...register("Seccion", {
-                        required: true,
-                      })}
-                    >
-                      <option>Seleccione el Curso</option>
-                      <option>Primer Grado</option>
-                      <option>Segundo Grado</option>
-                      <option>Tercer Grado</option>
-                      <option>Cuarto Grado</option>
-                      <option>Quinto Grado</option>
-                      <option>Sexto Grado</option>
-                    </select>
-                  </div>
-                
+                    <div className="row">
+                      <div className="col">
+                        <input
+                          type="file"
+                          name="archivo"
+                          id="archivo"
+                          className="form-control"
+                          placeholder="Archivo"
+                          isClearable
+                          {...register("archivo", {
+                            required: true,
+                          })}
+                        />
+                      </div>
+                    </div>
                 </div>
                 <br />
-                <div style={{ paddingInline: 100 }}>
+                <div className="row mx-auto" >
                   <button
                     type="button"
                     onClick={handleSubmit(onSubmit)}
-                    class="btn btn-primary"
+                    class="btn btn-outline-info"
                   >
-                    Modificar
+                    Responder
                   </button>
                 </div>
+
               </form>
             </div>
           </DialogContentText>
