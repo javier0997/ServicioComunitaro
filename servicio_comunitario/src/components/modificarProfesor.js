@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -6,33 +6,30 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import "firebase/auth";
 import firebase from "firebase/app";
-import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
-import { yupResolver } from "@hookform/resolvers/yup";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import DatePicker from "react-datepicker";
+import Loading from "../components/Loading";
 
 import "react-datepicker/dist/react-datepicker.css";
 
 export const ModificarProfesor = (props) => {
   const db = firebase.firestore();
+  const storage = firebase.storage();
 
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedDate2, setSelectedDate2] = useState(null);
 
-
- 
-
   const [isLoading, setIsLoading] = useState(false);
   const [id, setId] = useState(null);
 
+  const [files, setFiles] = useState([]);
+
   const { watch, register, handleSubmit } = useForm();
 
-   const datosUser = JSON.parse(localStorage.getItem("datosUser"));
+  const datosUser = JSON.parse(localStorage.getItem("datosUser"));
   const [user, setUser] = useState(datosUser ? datosUser : { rolSC: "" });
-
 
   const [open, setOpen] = useState(false);
 
@@ -42,6 +39,27 @@ export const ModificarProfesor = (props) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  useEffect(() => {
+    fetchUrls(props.data);
+  }, []);
+
+  const fetchUrls = async (data) => {
+    try {
+      const fileList = [];
+      for await (const file of data.archivo) {
+        const storageRef = storage.ref(file.bucketFileName);
+        const url = await storageRef.getDownloadURL();
+        fileList.push({
+          url,
+          fileName: file.fileName,
+        });
+      }
+      setFiles(fileList);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onSubmit = async (data) => {
@@ -60,28 +78,31 @@ export const ModificarProfesor = (props) => {
           bucketFileName: fileName,
         });
       }
-      
+
       await usuarioupdate.doc(props.data.id).update({
-        nombre_asignacion: data.nombre_asignacion,
-        profesor_user: user.userSC,
-        fecha_inicio: selectedDate.toLocaleDateString(),
-        fecha_fin: selectedDate2.toLocaleDateString(),
-        curso: user.cursoSC,
-        descripcion: data.descripcion,
-        archivo: fileList,
+        nombre_asignacion: data.nombre_asignacion || props.data.nombre_asignacion,
+        fecha_inicio: selectedDate?.toLocaleDateString() || props.data.fecha_inicio,
+        fecha_fin: selectedDate2?.toLocaleDateString() || props.data.fecha_fin,
+        descripcion: data.descripcion || props.data.descripcion,
+        archivo:fileList ,
       });
+      setIsLoading(false);
       window.location.reload();
-      alert("Profesor modificado con Exito!");
+      alert("Asignacion modificada con Exito!");
     } catch (error) {
       console.log(error);
-      alert("Error! No se pudo modifiassacar un profesor!");
+      alert("Error! No se pudo modificar la Asignacion!");
       setIsLoading(false);
     }
   };
 
   return (
-    <div >
-      <button type="button" onClick={handleClickOpen} class="btn btn-outline-secondary">
+    <div>
+      <button
+        type="button"
+        onClick={handleClickOpen}
+        class="btn btn-outline-secondary"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -104,13 +125,16 @@ export const ModificarProfesor = (props) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Modificar Asignacion"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          {"Modificar Asignacion"}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <div className="grid grid-cols-1 md:grid-cols-1">
               <form className="form-group mt-3">
-              <div className="row">
+                <div className="row">
                   <div className="col">
+                    <label>Fecha de Inicio: {console.log(props.data)}</label>
                     <DatePicker
                       selected={selectedDate}
                       onChange={(date) => setSelectedDate(date)}
@@ -118,11 +142,12 @@ export const ModificarProfesor = (props) => {
                       minDate={new Date()}
                       isClearable
                       locale="es"
-                      placeholderText="Fecha Inicio"
+                      placeholderText={props.data.fecha_inicio}
                       className="form-control"
                     />
                   </div>
                   <div className="col">
+                    <label>Fecha de Fin:</label>
                     <DatePicker
                       selected={selectedDate2}
                       onChange={(date) => setSelectedDate2(date)}
@@ -130,7 +155,7 @@ export const ModificarProfesor = (props) => {
                       minDate={new Date()}
                       isClearable
                       locale="es"
-                      placeholderText="Fecha Fin"
+                      placeholderText={props.data.fecha_fin}
                       className="form-control"
                       class="btn btn-secondary"
                     />
@@ -139,21 +164,26 @@ export const ModificarProfesor = (props) => {
                 <br />
                 <div className="row">
                   <div className="col">
+                    <label>Nombre de la Asignacion:</label>
                     <input
                       type="text"
                       name="nombre_asignacion"
                       id="nombre_asignacion"
                       className="form-control"
-                      placeholder="Nombre de la Asignacion"
+                      placeholder={props.data.nombre_asignacion}
                       {...register("nombre_asignacion", {
-                        required: true,
+                        required: false,
                       })}
                     />
                   </div>
                 </div>
-                 <br />
+                <br />
                 <div className="row">
                   <div className="col">
+                    {files.map((file) => (
+                      <label>Archivo: {file.fileName}</label>
+                    ))}
+
                     <input
                       type="file"
                       name="archivo"
@@ -162,21 +192,22 @@ export const ModificarProfesor = (props) => {
                       placeholder="Archivo"
                       isClearable
                       {...register("archivo", {
-                        required: true,
+                        required: false,
                       })}
                     />
                   </div>
                 </div>
-                <br /> 
+                <br />
 
                 <div className="row">
                   <div className="col">
+                    <label>Descripcion de la Asignacion:</label>
                     <textarea
                       className="form-control"
                       id="validationTextarea"
-                      placeholder="Descripcion de la Asignacion"
+                      placeholder={props.data.descripcion}
                       {...register("descripcion", {
-                        required: true,
+                        required: false,
                       })}
                     ></textarea>
                   </div>
@@ -184,14 +215,15 @@ export const ModificarProfesor = (props) => {
                 <br />
 
                 <div className="row">
+                  <div className="col">
                     <button
                       type="button"
                       onClick={handleSubmit(onSubmit)}
-                      class="btn btn-outline-secondary btn-lg btn-block "
+                      className="form-control btn-outline-secondary "
                     >
                       Modificar
                     </button>
-          
+                  </div>
                 </div>
               </form>
             </div>
