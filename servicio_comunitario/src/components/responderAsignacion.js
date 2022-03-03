@@ -113,8 +113,8 @@ export const ResponderAsignacion = (props) => {
               <form className="form-group mt-3">
               
                 <div className="row mx-auto" >
-                    <div className="row">
                       <div className="col">
+                    <div className="row">
                         <input
                           type="file"
                           name="archivo"

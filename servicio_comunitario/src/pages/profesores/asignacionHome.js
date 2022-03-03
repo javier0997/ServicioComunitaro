@@ -25,7 +25,9 @@ const AsignacionHome = () => {
 
   useEffect(() => {
     (async () => {
-      db.collection("asignaciones").where("profesor_user", "==", `${user.userSC}`).where("curso", "==", `${user.cursoSC}`)
+      db.collection("asignaciones")
+        .where("profesor_user", "==", `${user.userSC}`)
+        .where("curso", "==", `${user.cursoSC}`)
         .get()
         .then((snapshot) => {
           const asignaciones = [];
@@ -48,9 +50,9 @@ const AsignacionHome = () => {
       title: "Asignacion",
       field: "nombre_asignacion",
       headerStyle: {
-            backgroundColor: 'gray',
-            color: 'white'
-          },
+        backgroundColor: "gray",
+        color: "white",
+      },
     },
     // {
     //   title: "Curso",
@@ -65,89 +67,94 @@ const AsignacionHome = () => {
       render: (rowData) => <DescriptionDialog data={rowData} />,
       field: "descripcion",
       headerStyle: {
-        backgroundColor: 'gray',
-        color: 'white'
+        backgroundColor: "gray",
+        color: "white",
       },
       cellStyle: {
         //maxLenght:50
-      }
+      },
     },
     {
       title: "Fecha Inicio",
       field: "fecha_inicio",
       headerStyle: {
-        backgroundColor: 'gray',
-        color: 'white'
+        backgroundColor: "gray",
+        color: "white",
       },
     },
     {
       title: "Fecha Fin",
       field: "fecha_fin",
       headerStyle: {
-        backgroundColor: 'gray',
-        color: 'white'
+        backgroundColor: "gray",
+        color: "white",
       },
     },
     {
       title: "Descargar",
       render: (rowData) => <FilesDialog data={rowData} />,
       headerStyle: {
-        backgroundColor: 'gray',
-        color: 'white'
+        backgroundColor: "gray",
+        color: "white",
       },
     },
     {
       title: "Eliminar",
       render: (rowData) => <EliminarAsignacion data={rowData} />,
       headerStyle: {
-        backgroundColor: 'gray',
-        color: 'white'
+        backgroundColor: "gray",
+        color: "white",
       },
     },
     {
       title: "Modificar",
       render: (rowData) => <ModificarProfesor data={rowData} />,
       headerStyle: {
-        backgroundColor: 'gray',
-        color: 'white'
+        backgroundColor: "gray",
+        color: "white",
       },
     },
   ];
 
   if (user.rolSC == "profesor") {
     return (
-      <div>
-        <Row>
-          <Col xs={2}>
-            <SidebarProfesores />
-          </Col>
+      <div className="h-screen overflow-hidden">
+        <main className="flex">
+          <Row>
+            <Col xs={2}>
+              <SidebarProfesores />
+            </Col>
 
-          <Col>
-            <div>
-              <br />
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <h1>Tabla de Asignaciones</h1>
+            <Col>
+              <div className="flex-grow">
+                <br />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <h1>Tabla de Asignaciones</h1>
+                </div>
+                <br />
+                <section
+                  style={{ paddingRight: 20 }}
+                  className="md:container mx-auto"
+                >
+                  <TableComponent
+                    columns={columns}
+                    data={asignaciones ? asignaciones : []}
+                  />
+                </section>
+                <br />
+                <div className="container mx-auto">
+
+                <CrearAsignacion data={asignaciones} />
+                </div>
               </div>
-              <br />
-              <section
-                style={{ paddingRight: 20,  }}
-                className="md:container mx-auto"
-              >
-                <TableComponent
-                  columns={columns}
-                  data={asignaciones ? asignaciones : []}
-                />
-              </section>
-              <br />
-              <CrearAsignacion data={asignaciones} />
-            </div>
-          </Col>
-        </Row>
+            </Col>
+          </Row>
+        </main>
       </div>
     );
   } else {

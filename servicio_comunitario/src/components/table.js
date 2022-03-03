@@ -3,11 +3,13 @@ import MaterialTable from "material-table";
 
 const Table = ({ data, columns }) => {
   return (
-    <div className="mx-auto">
+    <div className="container mx-auto">
       <MaterialTable
         data={data}
         columns={columns}
         options={{
+          padding:'dense',
+          tableLayout:'auto',
           search: true,
           paging: true,
           filtering: false,
