@@ -147,7 +147,7 @@ const AsignacionHome = () => {
                   />
                 </section>
                 <br />
-                <div className="container mx-auto">
+                <div className="md:container md:mx-auto">
 
                 <CrearAsignacion data={asignaciones} />
                 </div>

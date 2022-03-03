@@ -3,7 +3,7 @@ import MaterialTable from "material-table";
 
 const Table = ({ data, columns }) => {
   return (
-    <div className="container mx-auto">
+    <div className="md:container md:mx-auto">
       <MaterialTable
         data={data}
         columns={columns}
