@@ -81,8 +81,8 @@ export const CrearAsignacion = (props) => {
         archivo: fileList,
       });
       setIsLoading(false);
-      window.location.reload();
       alert("Asignacion creada con Exito!");
+      window.location.reload();
     } catch (error) {
       console.log(error);
       alert("Error! No se pudo crea la Asignacion");
@@ -198,6 +198,16 @@ export const CrearAsignacion = (props) => {
             </div>
           </DialogContentText>
         </DialogContent>
+        {isLoading &&
+                <div className=" mt-4 mb-4 mx-auto">
+                  <div className=" mx-auto">
+                    <p>Cargando...</p>
+                  </div>
+                  <div className="row mx-auto">
+                    <Loading/>
+                    </div>
+                </div>
+          }
       </Dialog>
     </div>
   );

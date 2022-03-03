@@ -75,12 +75,12 @@ export const ModificarProfesor = (props) => {
         descripcion: data.descripcion || props.data.descripcion,
       });
       setIsLoading(false);
+      alert("Asignacion modificada con exito!");
       window.location.reload();
-      alert("Asignacion modificada con Exito!");
     } catch (error) {
       console.log(error);
-      alert("Error! No se pudo modificar la Asignacion!");
       setIsLoading(false);
+      alert("Error: No se pudo modificar la asignacion!");
     }
   };
 
@@ -205,6 +205,16 @@ export const ModificarProfesor = (props) => {
             </div>
           </DialogContentText>
         </DialogContent>
+        {isLoading &&
+                <div className=" mt-4 mb-4 mx-auto">
+                  <div className=" mx-auto">
+                    <p>Cargando...</p>
+                  </div>
+                  <div className="row mx-auto">
+                    <Loading/>
+                    </div>
+                </div>
+          }
       </Dialog>
     </div>
   );

@@ -3,11 +3,15 @@ import { Form, Button, Card, Container, Row, Col,Alert } from "react-bootstrap";
 import Navbar from "../components/Navbar";
 import firebase from "firebase/app";
 import { useHistory } from "react-router-dom";
+import Loading from "../components/Loading";
+
 
 
 
 export const Login = () => {
   localStorage.clear();
+  const [isLoading, setIsLoading] = useState(false);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -39,6 +43,7 @@ export const Login = () => {
   //   });
   
   const getUser = () => {
+    setIsLoading(true)
     db.collection('users').where('user', '==', `${email}`)
       .get()
       .then(querySnapshot => {
@@ -85,10 +90,9 @@ export const Login = () => {
            setAlert(true)
           }
 
-          
         });
       })
-
+      setIsLoading(false)
   };
 
   return (
@@ -135,7 +139,6 @@ export const Login = () => {
                           placeholder="Contraseña"
                           size="lg"
                         />
-                        <p className="errorMsg">{passwordError}</p>
                       </Form.Group>
 
                       <div style={{ paddingRight: 510 }}>
@@ -150,7 +153,18 @@ export const Login = () => {
                       </div>
                     </Form>
                   </Card.Text>
+                
                 </Card.Body>
+                {isLoading &&
+                <div className=" mt-4 mb-4 mx-auto">
+                  <div className=" mx-auto">
+                    <p>Cargando...</p>
+                  </div>
+                  <div className="row mx-auto">
+                    <Loading/>
+                    </div>
+                </div>
+                 }
               </Card>
             </div>
           </Row>

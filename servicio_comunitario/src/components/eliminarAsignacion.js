@@ -5,6 +5,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Loading from "../components/Loading";
 
 import "firebase/auth";
 import firebase from "firebase/app";
@@ -13,6 +14,7 @@ export const EliminarAsignacion = (props) => {
   const db = firebase.firestore();
 
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -23,13 +25,17 @@ export const EliminarAsignacion = (props) => {
   };
 
   const handleClick = async () => {
+    setIsLoading(true)
     console.log(props);
     try {
       await db.collection("asignaciones").doc(props.data.id).delete();
+      setIsLoading(false)
+      alert("Asignacion Eliminada");
       window.location.reload();
     } catch (error) {
       console.log(error);
-      alert("Asignacion Eliminada");
+      setIsLoading(false)
+      alert("Error");
     }
   };
 
@@ -101,8 +107,19 @@ export const EliminarAsignacion = (props) => {
                 </div>
               </div>
             </div>
+            
           </DialogContentText>
         </DialogContent>
+        {isLoading &&
+                <div className=" mt-4 mb-4 mx-auto">
+                  <div className=" mx-auto">
+                    <p>Cargando...</p>
+                  </div>
+                  <div className="row mx-auto">
+                    <Loading/>
+                    </div>
+                </div>
+          }
       </Dialog>
     </div>
   );

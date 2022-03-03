@@ -10,6 +10,8 @@ import { DescriptionDialog } from "../../components/DescriptionDialog";
 import { CrearAsignacion } from "../../components/CrearAsignacion";
 import SidebarProfesores from "../../components/SidebarProfesores";
 import { useHistory } from "react-router-dom";
+import Loading from "../../components/Loading";
+
 
 const AsignacionHome = () => {
   const db = firebase.firestore();
@@ -19,12 +21,12 @@ const AsignacionHome = () => {
   const datosUser = JSON.parse(localStorage.getItem("datosUser"));
   const [user, setUser] = useState(datosUser ? datosUser : { rolSC: "" });
 
-  // const handleLogout = () => {
-  //   firebase.auth().signOut();
-  // };
+  const [isLoading, setIsLoading] = useState(false);
+
 
   useEffect(() => {
     (async () => {
+      setIsLoading(true);
       db.collection("asignaciones")
         .where("profesor_user", "==", `${user.userSC}`)
         .where("curso", "==", `${user.cursoSC}`)
@@ -39,9 +41,9 @@ const AsignacionHome = () => {
             });
           });
           setAsig(asignaciones);
-          console.log(user.cursoSC);
         })
         .catch((error) => console.log(error));
+        setIsLoading(false);
     })();
   }, []);
 
@@ -136,11 +138,21 @@ const AsignacionHome = () => {
                 >
                   <h1>Tabla de Asignaciones</h1>
                 </div>
+              
                 <br />
                 <section
                   style={{ paddingRight: 20 }}
                   className="md:container mx-auto"
                 >
+                  {isLoading &&
+                      <div style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        marginBottom:15
+                      }}>
+                        <Loading/>
+                        </div>
+                    }
                   <TableComponent
                     columns={columns}
                     data={asignaciones ? asignaciones : []}
