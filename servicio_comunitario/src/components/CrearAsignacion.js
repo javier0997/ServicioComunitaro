@@ -71,15 +71,18 @@ export const CrearAsignacion = (props) => {
         });
       }
 
-      await db.collection("asignaciones").doc().set({
-        nombre_asignacion: data.nombre_asignacion,
-        profesor_user: user.userSC,
-        fecha_inicio: selectedDate.toLocaleDateString('en-GB'),
-        fecha_fin: selectedDate2.toLocaleDateString('en-GB'),
-        curso: user.cursoSC,
-        descripcion: data.descripcion,
-        archivo: fileList,
-      });
+      await db
+        .collection("asignaciones")
+        .doc()
+        .set({
+          nombre_asignacion: data.nombre_asignacion,
+          profesor_user: user.userSC,
+          fecha_inicio: selectedDate.toLocaleDateString("en-GB"),
+          fecha_fin: selectedDate2.toLocaleDateString("en-GB"),
+          curso: user.cursoSC,
+          descripcion: data.descripcion,
+          archivo: fileList,
+        });
       setIsLoading(false);
       alert("Asignacion creada con Exito!");
       window.location.reload();
@@ -198,16 +201,7 @@ export const CrearAsignacion = (props) => {
             </div>
           </DialogContentText>
         </DialogContent>
-        {isLoading &&
-                <div className=" mt-4 mb-4 mx-auto">
-                  <div className=" mx-auto">
-                    <p>Cargando...</p>
-                  </div>
-                  <div className="row mx-auto">
-                    <Loading/>
-                    </div>
-                </div>
-          }
+        {isLoading && <Loading />}
       </Dialog>
     </div>
   );

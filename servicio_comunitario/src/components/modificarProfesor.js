@@ -70,8 +70,10 @@ export const ModificarProfesor = (props) => {
       await usuarioupdate.doc(props.data.id).update({
         nombre_asignacion:
           data.nombre_asignacion || props.data.nombre_asignacion,
-        fecha_inicio: selectedDate?.toLocaleDateString('en-GB') || props.data.fecha_inicio,
-        fecha_fin: selectedDate2?.toLocaleDateString('en-GB') || props.data.fecha_fin,
+        fecha_inicio:
+          selectedDate?.toLocaleDateString("en-GB") || props.data.fecha_inicio,
+        fecha_fin:
+          selectedDate2?.toLocaleDateString("en-GB") || props.data.fecha_fin,
         descripcion: data.descripcion || props.data.descripcion,
       });
       setIsLoading(false);
@@ -205,16 +207,7 @@ export const ModificarProfesor = (props) => {
             </div>
           </DialogContentText>
         </DialogContent>
-        {isLoading &&
-                <div className=" mt-4 mb-4 mx-auto">
-                  <div className=" mx-auto">
-                    <p>Cargando...</p>
-                  </div>
-                  <div className="row mx-auto">
-                    <Loading/>
-                    </div>
-                </div>
-          }
+        {isLoading && <Loading />}
       </Dialog>
     </div>
   );

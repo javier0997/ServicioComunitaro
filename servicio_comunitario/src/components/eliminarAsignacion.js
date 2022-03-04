@@ -25,23 +25,27 @@ export const EliminarAsignacion = (props) => {
   };
 
   const handleClick = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     console.log(props);
     try {
       await db.collection("asignaciones").doc(props.data.id).delete();
-      setIsLoading(false)
+      setIsLoading(false);
       alert("Asignacion Eliminada");
       window.location.reload();
     } catch (error) {
       console.log(error);
-      setIsLoading(false)
+      setIsLoading(false);
       alert("Error");
     }
   };
 
   return (
     <div>
-      <button type="button" onClick={handleClickOpen} class="btn btn-outline-danger">
+      <button
+        type="button"
+        onClick={handleClickOpen}
+        class="btn btn-outline-danger"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -107,19 +111,9 @@ export const EliminarAsignacion = (props) => {
                 </div>
               </div>
             </div>
-            
           </DialogContentText>
         </DialogContent>
-        {isLoading &&
-                <div className=" mt-4 mb-4 mx-auto">
-                  <div className=" mx-auto">
-                    <p>Cargando...</p>
-                  </div>
-                  <div className="row mx-auto">
-                    <Loading/>
-                    </div>
-                </div>
-          }
+        {isLoading && <Loading />}
       </Dialog>
     </div>
   );

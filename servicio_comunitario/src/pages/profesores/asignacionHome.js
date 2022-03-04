@@ -22,7 +22,7 @@ const AsignacionHome = () => {
   const [user, setUser] = useState(datosUser ? datosUser : { rolSC: "" });
 
   const [isLoading, setIsLoading] = useState(false);
-
+ 
 
   useEffect(() => {
     (async () => {
@@ -43,7 +43,7 @@ const AsignacionHome = () => {
           setAsig(asignaciones);
         })
         .catch((error) => console.log(error));
-        setIsLoading(false);
+      setIsLoading(false);
     })();
   }, []);
 
@@ -138,21 +138,13 @@ const AsignacionHome = () => {
                 >
                   <h1>Tabla de Asignaciones</h1>
                 </div>
-              
+
                 <br />
                 <section
                   style={{ paddingRight: 20 }}
                   className="md:container mx-auto"
                 >
-                  {isLoading &&
-                      <div style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        marginBottom:15
-                      }}>
-                        <Loading/>
-                        </div>
-                    }
+                  {isLoading && <Loading />}
                   <TableComponent
                     columns={columns}
                     data={asignaciones ? asignaciones : []}
@@ -160,8 +152,7 @@ const AsignacionHome = () => {
                 </section>
                 <br />
                 <div className="md:container md:mx-auto">
-
-                <CrearAsignacion data={asignaciones} />
+                  <CrearAsignacion data={asignaciones} />
                 </div>
               </div>
             </Col>

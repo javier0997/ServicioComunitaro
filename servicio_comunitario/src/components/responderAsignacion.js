@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Loading from '../components/Loading';
 
 export const ResponderAsignacion = (props) => {
   const db = firebase.firestore();
@@ -18,6 +19,8 @@ export const ResponderAsignacion = (props) => {
   const schema = yup.object().shape({
     
   });
+
+  const [disable, setDisable] = React.useState(false);
 
   const datosUser = JSON.parse(localStorage.getItem("datosUser"));
   const [user, setUser] = useState(datosUser ? datosUser : { rolSC: "" });
@@ -144,6 +147,8 @@ export const ResponderAsignacion = (props) => {
             </div>
           </DialogContentText>
         </DialogContent>
+        {isLoading && <Loading />}
+
       </Dialog>
     </div>
   );

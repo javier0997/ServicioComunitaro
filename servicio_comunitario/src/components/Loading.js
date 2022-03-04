@@ -1,15 +1,25 @@
-import React from 'react'
+import React from "react";
 import { Spinner } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
 function Loading() {
   return (
-    <div>
-        <Spinner color='dark' style={{width:50,height:50}}/>
-    </div>
-  )
-}
+    <div
+      style={{
+        justifyContent:'center',
+        alignItems: "center",
+        display:'flex',
+      }}
+    >
+      <div>
+        <Spinner type="grow" color="success" style={{width:20, height:20}}  />
+      </div>
 
+      <div style={{paddingTop:12}}>
+        <p>Cargando...</p>
+      </div>
+    </div>
+  );
+}
 
 export default Loading;
