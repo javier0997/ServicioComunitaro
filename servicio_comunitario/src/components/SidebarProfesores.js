@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import firebase from "firebase/app";
 import { Auth } from "../context/auth";
 import { useHistory } from "react-router-dom";
+import { Col, Row, Alert, Button } from "react-bootstrap";
+
 
 function SidebarProfesores() {
   const datosUser = JSON.parse(localStorage.getItem("datosUser"));
@@ -16,6 +18,9 @@ function SidebarProfesores() {
   const handleLogout = () => {
     window.location.href = "/inicio";
   };
+
+  const history = useHistory();
+
 
   return (
     <div
@@ -119,11 +124,12 @@ function SidebarProfesores() {
           alignItems: "center",
         }}
       >
-        <Link className="nav-link " to="/profesores/estudientas">
+        <Link className="nav-link " to="/profesores/BoletasHome">
           <button
             type="button"
             class="btn btn-outline-light  "
             aria-pressed="true"
+            
           >
             <div
               style={{
@@ -149,6 +155,7 @@ function SidebarProfesores() {
           </button>
         </Link>
       </div>
+
 
       <div
         style={{
