@@ -124,7 +124,7 @@ export const ModificarProfesor = (props) => {
               <form className="form-group mt-3">
                 <div className="row">
                   <div className="col">
-                    <label>Fecha de Inicio: {console.log(props.data)}</label>
+                    <label>Fecha de Inicio:</label>
                     <DatePicker
                       selected={selectedDate}
                       onChange={(date) => setSelectedDate(date)}

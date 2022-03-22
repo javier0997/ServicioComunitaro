@@ -63,7 +63,7 @@ export const DescriptionDialog = ( props ) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} variant="outline-success">
+          <Button onClick={handleClose} variant="outline-primary">
             Atras
           </Button>
         </DialogActions>

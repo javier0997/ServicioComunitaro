@@ -51,7 +51,6 @@ export const ResponderAsignacion = (props) => {
     try {
       setIsLoading(true);
       const storageRef = firebase.storage().ref();
-      console.log(data);
 
       let nombre_completo = user.nombreSC+' '+user.apellidoSC;
 
@@ -81,7 +80,7 @@ export const ResponderAsignacion = (props) => {
         user_profesor: props.data.profesor_user,
         curso: user.cursoSC,
         fecha_respuesta: fecha,
-        archivo_respuesta: fileList,
+        archivo: fileList,
       });
       setIsLoading(false);
       window.location.reload();

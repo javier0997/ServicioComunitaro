@@ -8,7 +8,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-export const FilesDialog = ({ data }) => {
+export const FilesDialog = ({ data, respuesta }) => {
   const storage = firebase.storage();
 
   const [open, setOpen] = useState(false);
@@ -64,9 +64,18 @@ export const FilesDialog = ({ data }) => {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Archivo de la Asignacion"}
-        </DialogTitle>
+        {respuesta? 
+          <>
+          <DialogTitle id="alert-dialog-title">
+             {"Archivo de respuesta:"}
+          </DialogTitle>
+          </>
+          :
+          <DialogTitle id="alert-dialog-title">
+             {"Archivo de la Asignacion:"}
+           </DialogTitle>
+        }
+        
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             {files.map((file) => (
@@ -83,7 +92,7 @@ export const FilesDialog = ({ data }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} class="btn btn-outline-primary">
             Atras
           </Button>
         </DialogActions>
