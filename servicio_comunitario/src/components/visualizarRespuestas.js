@@ -13,12 +13,12 @@ export const VisualizarRespuestas = (props) => {
 
   var data = { id: 3, age: 36 };
   var path = {
-    pathname: "/asignacion_respuestas",
+    pathname: "/profesores/asignacion_respuestas",
     query: data,
   };
 
   const handlerClick = () => {
-    history.push(`/asignacion_respuestas/${props.data.nombre_asignacion}`);
+    history.push(`/profesores/asignacion_respuestas/${props.data.nombre_asignacion}`);
   };
 
   return (
