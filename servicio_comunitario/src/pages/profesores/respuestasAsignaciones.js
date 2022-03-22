@@ -1,14 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import firebase from "firebase/app";
 import TableComponent from "../../components/table";
 import { Col, Row, Alert, Button } from "react-bootstrap";
-import { EliminarAsignacion } from "../../components/eliminarAsignacion";
-import { ProfesorCreacion } from "../../components/ProfesorCreacion";
-import { VisualizarRespuestas} from "../../components/visualizarRespuestas"
-import { ModificarProfesor } from "../../components/modificarProfesor";
 import { FilesDialog } from "../../components/FilesDialog";
-import { DescriptionDialog } from "../../components/DescriptionDialog";
-import { CrearAsignacion } from "../../components/CrearAsignacion";
 import SidebarProfesores from "../../components/SidebarProfesores";
 import { useHistory } from "react-router-dom";
 import Loading from "../../components/Loading";
@@ -19,8 +13,7 @@ const RespuestasAsignaciones = (props) => {
   const db = firebase.firestore();
   const history = useHistory();
 
-  const [filtro, setFiltro] = useState(props.name)
-  console.log(filtro)
+  const [filtro, setFiltro] = useState(props.name);
     
   const [asignaciones, setAsig] = useState(null);
   const datosUser = JSON.parse(localStorage.getItem("datosUser"));
@@ -31,8 +24,9 @@ const RespuestasAsignaciones = (props) => {
   useEffect(() => {
     (async () => {
       setIsLoading(true);
-      db.collection("asignaciones")
-        .where("profesor_user", "==", `${user.userSC}`)
+      db.collection("respuesta_asignaciones")
+        .where("nombre_asignacion", "==", `${filtro}`)
+        .where("user_profesor", "==", `${user.userSC}`)
         .where("curso", "==", `${user.cursoSC}`)
         .get()
         .then((snapshot) => {
@@ -60,50 +54,30 @@ const RespuestasAsignaciones = (props) => {
         color: "white",
       },
     },
-    // {
-    //   title: "Curso",
-    //   field: "curso",
-    //   headerStyle: {
-    //     backgroundColor: 'gray',
-    //     color: 'white'
-    //   },
-    // },
     {
-      title: "Descripcion",
-      render: (rowData) => <DescriptionDialog data={rowData} />,
-      field: "descripcion",
-      headerStyle: {
-        backgroundColor: "gray",
-        color: "white",
-      },
-      cellStyle: {
-        //maxLenght:50
-      },
-    },
-    {
-      title: "Fecha Inicio",
-      field: "fecha_inicio",
+      title: "Nombre del Estudiante",
+      field: "nombre_estudiante",
       headerStyle: {
         backgroundColor: "gray",
         color: "white",
       },
     },
     {
-      title: "Fecha Fin",
-      field: "fecha_fin",
+      title: "Fecha de Respuesta",
+      field: "fecha_respuesta",
       headerStyle: {
         backgroundColor: "gray",
         color: "white",
       },
     },
-    /*{
+    {
       title: "Descargar",
-      render: (rowData) => <FilesDialog data={rowData} />,
+      render: (rowData) => <FilesDialog data={rowData} respuesta={true} />,
       headerStyle: {
         backgroundColor: "gray",
         color: "white",
       },
-    },*/
+    },
   ];
 
   if (user.rolSC == "profesor") {
