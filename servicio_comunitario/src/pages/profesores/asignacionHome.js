@@ -4,7 +4,7 @@ import TableComponent from "../../components/table";
 import { Col, Row, Alert, Button } from "react-bootstrap";
 import { EliminarAsignacion } from "../../components/eliminarAsignacion";
 import { ProfesorCreacion } from "../../components/ProfesorCreacion";
-import { VisualizarRespuestas} from "../../components/visualizarRespuestas"
+import { VisualizarRespuestas } from "../../components/visualizarRespuestas";
 import { ModificarProfesor } from "../../components/modificarProfesor";
 import { FilesDialog } from "../../components/FilesDialog";
 import { DescriptionDialog } from "../../components/DescriptionDialog";
@@ -12,7 +12,6 @@ import { CrearAsignacion } from "../../components/CrearAsignacion";
 import SidebarProfesores from "../../components/SidebarProfesores";
 import { useHistory, Link } from "react-router-dom";
 import Loading from "../../components/Loading";
-
 
 const AsignacionHome = () => {
   const db = firebase.firestore();
@@ -23,7 +22,6 @@ const AsignacionHome = () => {
   const [user, setUser] = useState(datosUser ? datosUser : { rolSC: "" });
 
   const [isLoading, setIsLoading] = useState(false);
- 
 
   useEffect(() => {
     (async () => {
@@ -119,8 +117,7 @@ const AsignacionHome = () => {
     },
     {
       title: "Respuestas",
-      render: (rowData) =>
-                <VisualizarRespuestas data={rowData}/>,
+      render: (rowData) => <VisualizarRespuestas data={rowData} />,
       headerStyle: {
         backgroundColor: "gray",
         color: "white",
@@ -138,7 +135,15 @@ const AsignacionHome = () => {
             </Col>
 
             <Col>
-              <div className="flex-grow">
+              <div
+                style={{
+                  height: "50vh",
+                  width: "110vh",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: 20,
+                }}
+              >
                 <br />
                 <div
                   style={{

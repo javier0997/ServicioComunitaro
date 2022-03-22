@@ -28,11 +28,13 @@ const Navigation = () => {
        
      
           {/* ------ Profesores Paths ----- */}
-          <Route  path="/profesores" component={asignacionHome} />
+          <Switch>
+          <Route  exact path="/profesores" component={asignacionHome} />
           <Route  path="/asignacion_respuestas/:name"render={({match})=>{
             return <RespuestasAsignaciones name={match.params.name} />
           }} /> 
           <Route exact path="/boletas_profesores" component={boletasHome} />
+          </Switch>
          
 
           {/* ------ Estudiantes Paths ----- */}
