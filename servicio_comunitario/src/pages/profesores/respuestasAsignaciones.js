@@ -10,18 +10,21 @@ import { FilesDialog } from "../../components/FilesDialog";
 import { DescriptionDialog } from "../../components/DescriptionDialog";
 import { CrearAsignacion } from "../../components/CrearAsignacion";
 import SidebarProfesores from "../../components/SidebarProfesores";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Loading from "../../components/Loading";
 
 
-const AsignacionHome = () => {
+const RespuestasAsignaciones = (props) => {
+    
   const db = firebase.firestore();
   const history = useHistory();
-  const [asignaciones, setAsig] = useState(null);
 
+  const [filtro, setFiltro] = useState(props.name)
+  console.log(filtro)
+    
+  const [asignaciones, setAsig] = useState(null);
   const datosUser = JSON.parse(localStorage.getItem("datosUser"));
   const [user, setUser] = useState(datosUser ? datosUser : { rolSC: "" });
-
   const [isLoading, setIsLoading] = useState(false);
  
 
@@ -93,39 +96,14 @@ const AsignacionHome = () => {
         color: "white",
       },
     },
-    {
+    /*{
       title: "Descargar",
       render: (rowData) => <FilesDialog data={rowData} />,
       headerStyle: {
         backgroundColor: "gray",
         color: "white",
       },
-    },
-    {
-      title: "Eliminar",
-      render: (rowData) => <EliminarAsignacion data={rowData} />,
-      headerStyle: {
-        backgroundColor: "gray",
-        color: "white",
-      },
-    },
-    {
-      title: "Modificar",
-      render: (rowData) => <ModificarProfesor data={rowData} />,
-      headerStyle: {
-        backgroundColor: "gray",
-        color: "white",
-      },
-    },
-    {
-      title: "Respuestas",
-      render: (rowData) =>
-                <VisualizarRespuestas data={rowData}/>,
-      headerStyle: {
-        backgroundColor: "gray",
-        color: "white",
-      },
-    },
+    },*/
   ];
 
   if (user.rolSC == "profesor") {
@@ -146,7 +124,7 @@ const AsignacionHome = () => {
                     justifyContent: "center",
                   }}
                 >
-                  <h1>Tabla de Asignaciones</h1>
+                  <h1>Respuestas Asignacion</h1>
                 </div>
 
                 <br />
@@ -161,9 +139,6 @@ const AsignacionHome = () => {
                   />
                 </section>
                 <br />
-                <div className="md:container md:mx-auto">
-                  <CrearAsignacion data={asignaciones} />
-                </div>
               </div>
             </Col>
           </Row>
@@ -190,4 +165,4 @@ const AsignacionHome = () => {
   }
 };
 
-export default AsignacionHome;
+export default RespuestasAsignaciones;

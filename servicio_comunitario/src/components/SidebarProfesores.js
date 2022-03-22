@@ -124,7 +124,7 @@ function SidebarProfesores() {
           alignItems: "center",
         }}
       >
-        <Link className="nav-link " to="/profesores/BoletasHome">
+        <Link className="nav-link " to="/boletas_profesores">
           <button
             type="button"
             class="btn btn-outline-light  "
