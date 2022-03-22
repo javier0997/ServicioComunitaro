@@ -12,10 +12,10 @@ function Loading() {
       }}
     >
       <div>
-        <Spinner type="grow" color="success" style={{width:20, height:20}}  />
+        <Spinner type="grow" color="primary" style={{width:20, height:20}}  />
       </div>
 
-      <div style={{paddingTop:12}}>
+      <div style={{marginLeft:5, paddingTop:12}}>
         <p>Cargando...</p>
       </div>
     </div>

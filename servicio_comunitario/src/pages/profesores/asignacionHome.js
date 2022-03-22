@@ -21,11 +21,10 @@ const AsignacionHome = () => {
   const datosUser = JSON.parse(localStorage.getItem("datosUser"));
   const [user, setUser] = useState(datosUser ? datosUser : { rolSC: "" });
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
-      setIsLoading(true);
       db.collection("asignaciones")
         .where("profesor_user", "==", `${user.userSC}`)
         .where("curso", "==", `${user.cursoSC}`)
@@ -40,9 +39,9 @@ const AsignacionHome = () => {
             });
           });
           setAsig(asignaciones);
+          setIsLoading(false)
         })
         .catch((error) => console.log(error));
-      setIsLoading(false);
     })();
   }, []);
 
@@ -135,10 +134,22 @@ const AsignacionHome = () => {
             </Col>
 
             <Col>
+            {isLoading?
+                  <>
+                  <div style={{
+                  marginTop: 50,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                  >
+                  <Loading />
+                  </div>
+                  </> 
+                :
               <div
                 style={{
                   height: "50vh",
-                  width: "110vh",
+                  width: "80vw",
                   justifyContent: "center",
                   alignItems: "center",
                   marginTop: 20,
@@ -159,7 +170,6 @@ const AsignacionHome = () => {
                   style={{ paddingRight: 20 }}
                   className="md:container mx-auto"
                 >
-                  {isLoading && <Loading />}
                   <TableComponent
                     columns={columns}
                     data={asignaciones ? asignaciones : []}
@@ -170,6 +180,7 @@ const AsignacionHome = () => {
                   <CrearAsignacion data={asignaciones} />
                 </div>
               </div>
+              }
             </Col>
           </Row>
         </main>

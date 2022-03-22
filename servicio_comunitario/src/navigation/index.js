@@ -28,21 +28,18 @@ const Navigation = () => {
        
      
           {/* ------ Profesores Paths ----- */}
-          <Switch>
           <Route  exact path="/profesores" component={asignacionHome} />
           <Route  path="/profesores/asignacion_respuestas/:name"render={({match})=>{
             return <RespuestasAsignaciones name={match.params.name} />
           }} /> 
           <Route exact path="/profesores/boletas_profesores" component={boletasHome} />
-          </Switch>
+        
          
 
           {/* ------ Estudiantes Paths ----- */}
           <Route path="/estudiantes" component={EstudiantesHome} />
         
 
-        {/* ------ Estudiantes Paths ----- */}
-        <Route path="/estudiantes" component={EstudiantesHome} />
       </Switch>
     </Router>
   );

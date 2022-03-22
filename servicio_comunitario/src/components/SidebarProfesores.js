@@ -25,7 +25,7 @@ function SidebarProfesores() {
   return (
     <div
       className="Sidebar bg-secondary text-sm"
-      style={{ height: "100vh", width: 240, overflowY: "auto" }}
+      style={{ height: "100vh", width: "20vw", overflowY: "auto" }}
     >
       <div
         style={{

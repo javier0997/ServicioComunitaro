@@ -108,8 +108,14 @@ const EstudiantesHome = () => {
             </Col>
 
             <Col>
-              <div className="flex-grow">
-                <br />
+                <div
+                style={{
+                  height: "50vh",
+                  width: "75vw",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: 20,
+                }}>
                 <div
                   style={{
                     display: "flex",

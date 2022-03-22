@@ -42,7 +42,7 @@ export const Login = () => {
   //     console.error(error);
   //   });
   
-  const getUser = () => {
+  const getUser = async () => {
     setIsLoading(true)
     db.collection('users').where('user', '==', `${email}`)
       .get()
@@ -69,6 +69,7 @@ export const Login = () => {
                                               };
                 localStorage.setItem('datosUser', JSON.stringify(profesorCaracteristicas));
                 history.push("/profesores");
+                setIsLoading(false)
                 break;
               case 'estudiante':
                 let estudianteCaracteristicas = {
@@ -80,6 +81,7 @@ export const Login = () => {
                 };
                 localStorage.setItem('datosUser', JSON.stringify(estudianteCaracteristicas));
                 history.push("/estudiantes");
+                setIsLoading(false)
                 break;
               case 'administrador':
                 localStorage.setItem("loginSC", "3");
@@ -92,7 +94,7 @@ export const Login = () => {
 
         });
       })
-      setIsLoading(false)
+      
   };
 
   return (
@@ -157,9 +159,6 @@ export const Login = () => {
                 </Card.Body>
                 {isLoading &&
                 <div className=" mt-4 mb-4 mx-auto">
-                  <div className=" mx-auto">
-                    <p>Cargando...</p>
-                  </div>
                   <div className="row mx-auto">
                     <Loading/>
                     </div>

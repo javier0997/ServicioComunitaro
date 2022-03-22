@@ -39,9 +39,9 @@ const RespuestasAsignaciones = (props) => {
             });
           });
           setAsig(asignaciones);
+          setIsLoading(false);
         })
         .catch((error) => console.log(error));
-      setIsLoading(false);
     })();
   }, []);
 
@@ -90,7 +90,26 @@ const RespuestasAsignaciones = (props) => {
             </Col>
 
             <Col>
-              <div className="flex-grow">
+            {isLoading?
+                  <>
+                  <div style={{
+                  marginTop: 50,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                  >
+                  <Loading />
+                  </div>
+                  </> 
+                :
+              <div 
+              style={{
+                  height: "50vh",
+                  width: "65vw",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: 20,
+                }}>
                 <br />
                 <div
                   style={{
@@ -103,10 +122,9 @@ const RespuestasAsignaciones = (props) => {
 
                 <br />
                 <section
-                  style={{ paddingRight: 20 }}
+                  style={{ }}
                   className="md:container mx-auto"
                 >
-                  {isLoading && <Loading />}
                   <TableComponent
                     columns={columns}
                     data={asignaciones ? asignaciones : []}
@@ -114,6 +132,7 @@ const RespuestasAsignaciones = (props) => {
                 </section>
                 <br />
               </div>
+             }
             </Col>
           </Row>
         </main>
