@@ -58,14 +58,13 @@ class Navbar extends Component {
                   </Link>
                 </li>
               </ul>
-              <Button  variant="light">
-                <Link className="nav-link text-secondary "  to="/login">
-                  <text>
+             
+              <Link className="nav-link  "  to="/login">
+                <Button  variant="outline-light">
                   Inicio de sesion
-
-                  </text>
-                </Link>
-              </Button>
+                 </Button>
+              </Link>
+              
             </div>
           </div>
         </nav>

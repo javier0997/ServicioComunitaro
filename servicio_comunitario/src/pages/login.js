@@ -44,28 +44,22 @@ export const Login = () => {
   
   const getUser = async () => {
     setIsLoading(true)
-    db.collection('users').where('user', '==', `${email}`)
+    await db.collection('users').where('user', '==', `${email}`)
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
-          setRol(doc.data().rol);
-          setEmailAux(doc.data().user);
-          setPasswordAux(doc.data().contraseña);
-          setCurso(doc.data().curso);
-          setNombre(doc.data().nombre);
-          setApellido(doc.data().apellido);
           
-          console.log(rol+" "+emailAux+" "+passwordAux+" "+curso + " "+doc.data().correo );
+          console.log(email + " "+ doc.data().rol+" "+doc.data().user+" "+doc.data().contraseña+" "+doc.data().curso + " "+doc.data().correo );
 
-          if (email==emailAux && password==passwordAux ){
-            switch (rol) {
+          if (email==doc.data().user && password==doc.data().contraseña ){
+            switch (doc.data().rol) {
               case 'profesor':
                 let profesorCaracteristicas = {
                                                 'userSC': `${email}`,
-                                                'nombreSC': `${nombre}`,
-                                                'apellidoSC': `${apellido}`,
-                                                'cursoSC': `${curso}`,
-                                                'rolSC': `${rol}`
+                                                'nombreSC': `${doc.data().nombre}`,
+                                                'apellidoSC': `${doc.data().apellido}`,
+                                                'cursoSC': `${doc.data().curso}`,
+                                                'rolSC': `${doc.data().rol}`
                                               };
                 localStorage.setItem('datosUser', JSON.stringify(profesorCaracteristicas));
                 history.push("/profesores");
@@ -73,12 +67,12 @@ export const Login = () => {
                 break;
               case 'estudiante':
                 let estudianteCaracteristicas = {
-                                        'userSC': `${email}`,
-                                        'nombreSC': `${nombre}`,
-                                        'apellidoSC': `${apellido}`,
-                                        'cursoSC': `${curso}`,
-                                        'rolSC': `${rol}`
-                };
+                                            'userSC': `${email}`,
+                                            'nombreSC': `${doc.data().nombre}`,
+                                            'apellidoSC': `${doc.data().apellido}`,
+                                            'cursoSC': `${doc.data().curso}`,
+                                            'rolSC': `${doc.data().rol}`
+                                          };
                 localStorage.setItem('datosUser', JSON.stringify(estudianteCaracteristicas));
                 history.push("/estudiantes");
                 setIsLoading(false)
@@ -89,7 +83,8 @@ export const Login = () => {
 
             }
           }else {
-           setAlert(true)
+           alert("Error: contraseña o usuario incorrectos.")
+           setIsLoading(false)
           }
 
         });
@@ -111,11 +106,9 @@ export const Login = () => {
             <div style={{ paddingTop: 100 }}>
               <Card className="bg-white">
                 <Card.Body>
-                  <Card.Title className="text-muted " style={{ fontSize: 40 }}>
+                  <Card.Title className="text-muted " style={{ fontSize: 40, marginBottom:40 }}>
                     Inicio de Sesion
                   </Card.Title>
-                  <br />
-                  <br />
                   <Card.Text>
                     <Form>
                       <Form.Group className="mb-3" >
@@ -131,7 +124,6 @@ export const Login = () => {
 
                       <Form.Group
                         className="mb-3"
-                        controlId="formBasicPassword"
                       >
                         <Form.Control
                           type="password"
@@ -171,7 +163,7 @@ export const Login = () => {
           <Row className="m-auto align-self-center">
             <div className="footer-copyright text-center py-3 text-muted">
               Todos los derechos Reservados
-              <p> © U.E. Escuela Parroquial San José</p>
+               © U.E. Escuela Parroquial San José
             </div>
           </Row>
         </Col>
