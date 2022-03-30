@@ -18,6 +18,15 @@ const Table = ({ data, columns }) => {
             fontSize: 14,
           },
         }}
+        localization={{
+          body: {
+              emptyDataSourceMessage: (
+                  <h5>
+                    No se encontraron registros.
+                  </h5>
+              ),
+          },
+         }}
       />
     </div>
   );

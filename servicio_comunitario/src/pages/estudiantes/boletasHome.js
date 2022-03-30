@@ -13,7 +13,7 @@ import Loading from "../../components/Loading";
 const BoletasHomeEstudiantes = () => {
   const db = firebase.firestore();
   const history = useHistory();
-  const [asignaciones, setAsig] = useState(null);
+  const [boletas, setBoletas] = useState(null);
 
   const datosUser = JSON.parse(localStorage.getItem("datosUser"));
   const [user, setUser] = useState(datosUser ? datosUser : { rolSC: "" });
@@ -23,62 +23,45 @@ const BoletasHomeEstudiantes = () => {
   useEffect(() => {
     (async () => {
       setIsLoading(true);
-
-      db.collection("asignaciones")
+      db.collection("boletas")
+        .where("user_estudiante", "==", `${user.userSC}`)
         .where("curso", "==", `${user.cursoSC}`)
         .get()
         .then((snapshot) => {
-          const asignaciones = [];
+          const boletas = [];
           snapshot.forEach((doc) => {
             const data = doc.data();
-            asignaciones.push({
+            boletas.push({
               id: doc.id,
               ...data,
             });
           });
-          setAsig(asignaciones);
-          console.log(user.cursoSC);
+          setBoletas(boletas);
+          setIsLoading(false);
         })
         .catch((error) => console.log(error));
-      setIsLoading(false);
+      
     })();
   }, []);
 
   const columns = [
     {
-      title: "Asignacion",
-      field: "nombre_asignacion",
+      title: "Lapso",
+      field: "lapso",
       headerStyle: {
         backgroundColor: "#00BFFF",
+        fontSize:16,
+        fontWeight: 'bold'
       },
     },
-    /*{
-      title: "Curso",
-      field: "curso",
-      headerStyle: {
-        backgroundColor: '#00BFFF',
-      },
-    },*/
     {
-      title: "Descripcion",
+      title: "Comentarios",
       render: (rowData) => <DescriptionDialog data={rowData} />,
-      field: "descripcion",
+      field: "comentario",
       headerStyle: {
         backgroundColor: "#00BFFF",
-      },
-    },
-    {
-      title: "Fecha Inicio",
-      field: "fecha_inicio",
-      headerStyle: {
-        backgroundColor: "#00BFFF",
-      },
-    },
-    {
-      title: "Fecha Fin",
-      field: "fecha_fin",
-      headerStyle: {
-        backgroundColor: "#00BFFF",
+        fontSize:16,
+        fontWeight: 'bold'
       },
     },
     {
@@ -87,13 +70,8 @@ const BoletasHomeEstudiantes = () => {
       headerStyle: {
         backgroundColor: "#00BFFF",
         maxWidth: 20,
-      },
-    },
-    {
-      title: "Reponder",
-      render: (rowData) => <ResponderAsignacion data={rowData} />,
-      headerStyle: {
-        backgroundColor: "#00BFFF",
+        fontSize:16,
+        fontWeight: 'bold'
       },
     },
   ];
@@ -108,13 +86,26 @@ const BoletasHomeEstudiantes = () => {
             </Col>
 
             <Col>
-                <div
-                style={{
-                  height: "50vh",
-                  width: "75vw",
+            {isLoading?
+                  <>
+                  <div style={{
+                  marginTop: 50,
                   justifyContent: "center",
                   alignItems: "center",
-                  marginTop: 20,
+                }}
+                  >
+                  <Loading />
+                  </div>
+                  </> 
+                :
+                <div
+                style={{
+                  marginLeft: 50,
+                  height: "50vh",
+                  width: "60vw",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: 50,
                 }}>
                 <div
                   style={{
@@ -122,7 +113,7 @@ const BoletasHomeEstudiantes = () => {
                     justifyContent: "center",
                   }}
                 >
-                  <h1>Boletass</h1>
+                  <h1>Boletas</h1>
                 </div>
                 <br />
                 <section
@@ -132,11 +123,11 @@ const BoletasHomeEstudiantes = () => {
                   {isLoading && <Loading />}
                   <TableComponent
                     columns={columns}
-                    data={asignaciones ? asignaciones : []}
+                    data={boletas ? boletas : []}
                   />
                 </section>
               </div>
-              <br />
+              }
             </Col>
           </Row>
         </main>

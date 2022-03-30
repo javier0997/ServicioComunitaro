@@ -37,10 +37,10 @@ const EstudiantesHome = () => {
             });
           });
           setAsig(asignaciones);
+          setIsLoading(false)
           console.log(user.cursoSC);
         })
         .catch((error) => console.log(error));
-      setIsLoading(false);
     })();
   }, []);
 
@@ -50,21 +50,18 @@ const EstudiantesHome = () => {
       field: "nombre_asignacion",
       headerStyle: {
         backgroundColor: "#00BFFF",
+        fontSize:16,
+        fontWeight: 'bold'
       },
     },
-    /*{
-      title: "Curso",
-      field: "curso",
-      headerStyle: {
-        backgroundColor: '#00BFFF',
-      },
-    },*/
     {
       title: "Descripcion",
       render: (rowData) => <DescriptionDialog data={rowData} />,
       field: "descripcion",
       headerStyle: {
         backgroundColor: "#00BFFF",
+        fontSize:16,
+        fontWeight: 'bold'
       },
     },
     {
@@ -72,6 +69,8 @@ const EstudiantesHome = () => {
       field: "fecha_inicio",
       headerStyle: {
         backgroundColor: "#00BFFF",
+        fontSize:16,
+        fontWeight: 'bold'
       },
     },
     {
@@ -79,6 +78,8 @@ const EstudiantesHome = () => {
       field: "fecha_fin",
       headerStyle: {
         backgroundColor: "#00BFFF",
+        fontSize:16,
+        fontWeight: 'bold'
       },
     },
     {
@@ -87,6 +88,8 @@ const EstudiantesHome = () => {
       headerStyle: {
         backgroundColor: "#00BFFF",
         maxWidth: 20,
+        fontSize:16,
+        fontWeight: 'bold'
       },
     },
     {
@@ -94,6 +97,8 @@ const EstudiantesHome = () => {
       render: (rowData) => <ResponderAsignacion data={rowData} />,
       headerStyle: {
         backgroundColor: "#00BFFF",
+        fontSize:16,
+        fontWeight: 'bold'
       },
     },
   ];
@@ -108,6 +113,18 @@ const EstudiantesHome = () => {
             </Col>
 
             <Col>
+            {isLoading?
+                  <>
+                  <div style={{
+                  marginTop: 50,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                  >
+                  <Loading />
+                  </div>
+                  </> 
+                :
                 <div
                 style={{
                   height: "50vh",
@@ -136,7 +153,7 @@ const EstudiantesHome = () => {
                   />
                 </section>
               </div>
-              <br />
+                }
             </Col>
           </Row>
         </main>
