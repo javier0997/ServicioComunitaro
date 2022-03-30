@@ -56,7 +56,7 @@ const BoletasHomeEstudiantes = () => {
     },
     {
       title: "Comentarios",
-      render: (rowData) => <DescriptionDialog data={rowData} />,
+      render: (rowData) => <DescriptionDialog data={rowData} boleta={true} />,
       field: "comentario",
       headerStyle: {
         backgroundColor: "#00BFFF",
@@ -100,9 +100,9 @@ const BoletasHomeEstudiantes = () => {
                 :
                 <div
                 style={{
-                  marginLeft: 50,
+                  marginLeft: 100,
                   height: "50vh",
-                  width: "60vw",
+                  width: "50vw",
                   justifyContent: "center",
                   alignItems: "center",
                   marginTop: 50,

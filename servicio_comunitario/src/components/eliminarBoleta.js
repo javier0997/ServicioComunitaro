@@ -10,7 +10,7 @@ import Loading from "../components/Loading";
 import "firebase/auth";
 import firebase from "firebase/app";
 
-export const EliminarAsignacion = (props) => {
+export const EliminarBoleta = (props) => {
   const db = firebase.firestore();
 
   const [open, setOpen] = useState(false);
@@ -28,9 +28,9 @@ export const EliminarAsignacion = (props) => {
     setIsLoading(true);
     console.log(props);
     try {
-      await db.collection("asignaciones").doc(props.data.id).delete();
+      await db.collection("boletas").doc(props.data.id).delete();
       setIsLoading(false);
-      alert("Asignacion Eliminada");
+      alert("Boleta Eliminada");
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -69,7 +69,7 @@ export const EliminarAsignacion = (props) => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle style={{ fontFamily: "cabin" }}>
-          {"¿Seguro desea eliminar esta Asignacion?"}
+          {"¿Seguro desea eliminar esta Boleta?"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -88,7 +88,7 @@ export const EliminarAsignacion = (props) => {
                       onClick={handleClick}
                       class="btn btn-danger"
                     >
-                      Eliminar
+                      Eliminar 
                     </button>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -22,6 +22,30 @@ export const CrearBoletas = (props) => {
   const { watch, register, handleSubmit } = useForm();
 
   const [open, setOpen] = useState(false);
+  const [estudiantes, setEstudiantes] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      setIsLoading(true);
+      db.collection("users")
+        .where("curso", "==", `${user.cursoSC}`)
+        .where("rol", "==", `estudiante`)
+        .get()
+        .then((snapshot) => {
+          const estudiantes = [];
+          snapshot.forEach((doc) => {
+            const data = doc.data();
+            estudiantes.push({
+              id: doc.id,
+              ...data,
+            });
+          });
+          setEstudiantes(estudiantes);
+        })
+        .catch((error) => console.log(error));
+      setIsLoading(false);
+    })();
+  }, []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -31,11 +55,26 @@ export const CrearBoletas = (props) => {
     setOpen(false);
   };
 
+  let estudiantesLista = estudiantes.length > 0
+        && estudiantes.map((item, i) => {
+        return (
+          <option key={i} value={[item.user,item.nombre,item.apellido]}>{item.nombre + " " + item.apellido}</option>
+        )
+    }, this);
+
   const onSubmit = async (data) => {
-    try {
+   try {
       setIsLoading(true);
       const storageRef = firebase.storage().ref();
       console.log(data);
+
+      let date = new Date()
+      let day = date.getDate()
+      let month = date.getMonth() + 1
+      let year = date.getFullYear()
+      let hora = date.getHours()
+      let min = date.getMinutes()
+      let fecha_carga = day+'/'+month+'/'+year+' '+hora+':'+min;
 
       const fileList = [];
       for await (const file of data.archivo) {
@@ -48,12 +87,17 @@ export const CrearBoletas = (props) => {
         });
       }
 
-      await db.collection("asignaciones").doc().set({
-        nombre_asignacion: data.nombre_asignacion,
-        profesor_user: user.userSC,
+      let arreglo = data.estudiante.split(','); 
+
+      await db.collection("boletas").doc().set({  
+        user_estudiante: arreglo[0],
+        estudiante_nombre: arreglo[1] + " " + arreglo[2],
+        user_profesor: user.userSC,
         curso: user.cursoSC,
-        descripcion: data.descripcion,
+        comentario: data.descripcion,
         archivo: fileList,
+        fecha:  fecha_carga,
+        lapso: props.lapso
       });
       setIsLoading(false);
       alert("Boelta cargada con Exito!");
@@ -84,20 +128,20 @@ export const CrearBoletas = (props) => {
           <DialogContentText id="alert-dialog-description">
             <div className="grid grid-cols-1 md:grid-cols-1">
               <form className="form-group mt-3">
-                <div className="row">
-                  <div className="col">
-                    <input
-                      type="text"
-                      name="nombre_asignacion"
-                      id="nombre_asignacion"
-                      className="form-control"
-                      placeholder="Nombre del Estudiante"
-                      {...register("nombre_asignacion", {
-                        required: true,
-                      })}
-                    />
+                  <div className="row ">
+                      <select
+                        className="form-control"
+                        class="btn btn-secondary"
+                        id="inlineFormCustomSelect"
+                        name="estudiante"
+                        {...register("estudiante", {
+                          required: true,
+                        })}
+                      >
+                        <option>Seleccione el estudiante</option>
+                        {estudiantesLista}
+                      </select>
                   </div>
-                </div>
                 <br />
                 <div className="row">
                   <div className="col">

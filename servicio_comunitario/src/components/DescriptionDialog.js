@@ -46,27 +46,55 @@ export const DescriptionDialog = ( props ) => {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Descripcion de la asignacion:"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+        {props.boleta? 
+        <>
+            <DialogTitle id="alert-dialog-title">
+              {"Comentarios de la Boleta:"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                
+                  <p>
+                    <a
+                      target="_blank"
+                    >
+                      {props.data.comentario}
+                    </a>
+                  </p>
             
-              <p>
-                <a
-                  target="_blank"
-                >
-                  {props.data.descripcion}
-                </a>
-              </p>
-        
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} variant="outline-primary">
-            Atras
-          </Button>
-        </DialogActions>
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} variant="outline-primary">
+                Atras
+              </Button>
+            </DialogActions>
+            </>
+            :
+            <div>
+            <DialogTitle id="alert-dialog-title">
+            {"Descripcion de la asignacion:"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              
+                <p>
+                  <a
+                    target="_blank"
+                  >
+                    {props.data.descripcion}
+                  </a>
+                </p>
+                 
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} variant="outline-primary">
+              Atras
+            </Button>
+          </DialogActions>
+          </div>
+          }
       </Dialog>
     </div>
   );

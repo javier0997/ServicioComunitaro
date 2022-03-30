@@ -58,7 +58,7 @@ export const EliminarEstudiante = (props) => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle style={{ fontFamily: "cabin" }}>
-          {"Seguro desea eliminar al Estudiante ?"}
+          {"¿Seguro desea eliminar al Estudiante?"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
