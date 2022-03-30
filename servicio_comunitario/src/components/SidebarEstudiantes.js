@@ -116,7 +116,7 @@ function SidebarEstudiantes() {
           alignItems: "center",
         }}
       >
-        <Link className="nav-link " to="">
+        <Link className="nav-link " to="/estudiantes/boletas">
           <button
             type="button"
             class="btn btn-outline-dark  "

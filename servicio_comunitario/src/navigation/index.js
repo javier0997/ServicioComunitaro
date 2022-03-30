@@ -6,6 +6,7 @@ import asignacionHome from "../pages/profesores/asignacionHome";
 import boletasHome from "../pages/profesores/boletasHome";
 import RespuestasAsignaciones from "../pages/profesores/respuestasAsignaciones";
 import EstudiantesHome from "../pages/estudiantes/asignacionesHome";
+import BoletasHomeEstudiantes from "../pages/estudiantes/boletasHome";
 import LoginScreen from "../pages/login";
 import administradorhome from "../pages/administrador/administradorhome";
 
@@ -38,6 +39,7 @@ const Navigation = () => {
 
           {/* ------ Estudiantes Paths ----- */}
           <Route path="/estudiantes" component={EstudiantesHome} />
+          <Route exact path="/estudiantes/boletas" component={BoletasHomeEstudiantes} />
         
 
       </Switch>
