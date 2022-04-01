@@ -2,19 +2,17 @@ import React, { useState, useEffect, useContext } from "react";
 import firebase from "firebase/app";
 import TableComponent from "./table";
 import { Col, Row, Alert, Button } from "react-bootstrap";
-import { EliminarAsignacion } from "./eliminarAsignacion";
-import { ModificarProfesor } from "./modificarProfesor";
+import { EliminarBoleta } from "./eliminarBoleta";
 import { FilesDialog } from "./FilesDialog";
 import { DescriptionDialog } from "./DescriptionDialog";
 import { CrearBoletas } from "./CrearBoletas";
-import SidebarProfesores from "./SidebarProfesores";
 import { useHistory } from "react-router-dom";
 import Loading from "./Loading";
 
 const TablaSegundoLapso = () => {
   const db = firebase.firestore();
   const history = useHistory();
-  const [asignaciones, setAsig] = useState(null);
+  const [boletas, setBoletas] = useState(null);
 
   const datosUser = JSON.parse(localStorage.getItem("datosUser"));
   const [user, setUser] = useState(datosUser ? datosUser : { rolSC: "" });
@@ -24,30 +22,30 @@ const TablaSegundoLapso = () => {
   useEffect(() => {
     (async () => {
       setIsLoading(true);
-      db.collection("asignaciones")
-        .where("profesor_user", "==", `${user.userSC}`)
+      db.collection("boletas")
         .where("curso", "==", `${user.cursoSC}`)
+        .where("lapso", "==", "Segundo Lapso")
         .get()
         .then((snapshot) => {
-          const asignaciones = [];
+          const boletas = [];
           snapshot.forEach((doc) => {
             const data = doc.data();
-            asignaciones.push({
+            boletas.push({
               id: doc.id,
               ...data,
             });
           });
-          setAsig(asignaciones);
+          setBoletas(boletas);
+          setIsLoading(false);
         })
         .catch((error) => console.log(error));
-      setIsLoading(false);
     })();
   }, []);
 
   const columns = [
     {
       title: "Estudiante",
-      field: "nombre_asignacion",
+      field: "estudiante_nombre",
       headerStyle: {
         backgroundColor: "gray",
         color: "white",
@@ -55,7 +53,7 @@ const TablaSegundoLapso = () => {
     },
     {
       title: "Comentario",
-      render: (rowData) => <DescriptionDialog data={rowData} />,
+      render: (rowData) => <DescriptionDialog data={rowData} boleta={true} />,
       field: "descripcion",
       headerStyle: {
         backgroundColor: "gray",
@@ -75,15 +73,7 @@ const TablaSegundoLapso = () => {
     },
     {
       title: "Eliminar",
-      render: (rowData) => <EliminarAsignacion data={rowData} />,
-      headerStyle: {
-        backgroundColor: "gray",
-        color: "white",
-      },
-    },
-    {
-      title: "Modificar",
-      render: (rowData) => <ModificarProfesor data={rowData} />,
+      render: (rowData) => <EliminarBoleta data={rowData} />,
       headerStyle: {
         backgroundColor: "gray",
         color: "white",
@@ -94,30 +84,39 @@ const TablaSegundoLapso = () => {
   if (user.rolSC == "profesor") {
     return (
       <div className="h-screen overflow-hidden">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            width: "60vw",
+          }}
+        >
+          <h1>Tabla de Boleta Segundo Lapso</h1>
+        </div>
+        {isLoading ? (
+          <>
             <div
               style={{
-                display: "flex",
+                marginTop: 50,
                 justifyContent: "center",
+                alignItems: "center",
               }}
             >
-              <h1>Tabla de Boleta Segundo Lapso</h1>
+              <Loading />
             </div>
-
-            <br />
-            <section
-              style={{ paddingRight: 20 }}
-              className="md:container mx-auto"
-            >
-              {isLoading && <Loading />}
-              <TableComponent
-                columns={columns}
-                data={asignaciones ? asignaciones : []}
-              />
-            </section>
+          </>
+        ) : (
+          <section
+            style={{ paddingRight: 20 }}
+            className="md:container mx-auto"
+          >
+            <TableComponent columns={columns} data={boletas ? boletas : []} />
             <br />
             <div className="md:container md:mx-auto">
-              <CrearBoletas data={asignaciones} />
+              <CrearBoletas lapso={"Segundo Lapso"} />
             </div>
+          </section>
+        )}
       </div>
     );
   } else {

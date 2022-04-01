@@ -57,14 +57,7 @@ const BoletasHome = () => {
         color: "white",
       },
     },
-    // {
-    //   title: "Curso",
-    //   field: "curso",
-    //   headerStyle: {
-    //     backgroundColor: 'gray',
-    //     color: 'white'
-    //   },
-    // },
+   
     {
       title: "Descripcion",
       render: (rowData) => <DescriptionDialog data={rowData} />,

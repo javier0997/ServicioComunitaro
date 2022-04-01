@@ -3,11 +3,9 @@ import firebase from "firebase/app";
 import TableComponent from "./table";
 import { Col, Row, Alert, Button } from "react-bootstrap";
 import { EliminarBoleta } from "./eliminarBoleta";
-import { ModificarProfesor } from "./modificarProfesor";
 import { FilesDialog } from "./FilesDialog";
 import { DescriptionDialog } from "./DescriptionDialog";
 import { CrearBoletas } from "./CrearBoletas";
-import SidebarProfesores from "./SidebarProfesores";
 import { useHistory } from "react-router-dom";
 import Loading from "./Loading";
 
@@ -26,6 +24,7 @@ const TablaPrimerLapso = () => {
       setIsLoading(true);
       db.collection("boletas")
         .where("curso", "==", `${user.cursoSC}`)
+        .where("lapso", "==", "Primer Lapso")
         .get()
         .then((snapshot) => {
           const boletas = [];
