@@ -185,7 +185,7 @@ class Contactos extends Component {
                         alignItems: "center",
                       }}
                     >
-                      Gmail
+                      direccionsanjose2015@gmail.com
                     </div>
                   </Card.Link>
                   <Card.Text style={{ marginTop: "1rem" }}>
@@ -232,7 +232,7 @@ class Contactos extends Component {
                         alignItems: "center",
                       }}
                     >
-                      Another Link
+                      0212-551-9656
                     </div>
                   </Card.Link>
                   <Card.Text style={{ marginTop: "1rem" }}>

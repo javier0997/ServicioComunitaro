@@ -28,7 +28,7 @@ export const Footer = () => {
             </div>
             <ul class="list-unstyled">
               <li>
-                <p>aqui va la direccion bla bla bla bla bla bla bla</p>
+                <p>Av. Fuerzas Armadas, Esquina de Telares a San Enrique. Detras de la Iglesia San Jose.</p>
               </li>
             </ul>
           </div>
